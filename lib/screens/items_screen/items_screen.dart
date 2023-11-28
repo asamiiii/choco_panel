@@ -1,5 +1,6 @@
 import 'package:choco_panel/data_source/dummy_data/dummy.dart';
 import 'package:choco_panel/screens/items_screen/item.dart';
+import 'package:choco_panel/screens/items_screen/item_details.dart';
 import 'package:flutter/material.dart';
 
 class ItemsScreen extends StatelessWidget {
@@ -18,19 +19,23 @@ class ItemsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               ElevatedButton(onPressed: () {
-                
+                Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>  ItemDetails(),
+                          ));
               }, 
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.amber)
               ),
-              child: SizedBox(
+              child: const SizedBox(
                 width: 100,
                 height: 30,
                 child: Row(
                   children: [Text('Add Item',style: TextStyle(fontWeight: FontWeight.bold),),Icon(Icons.add)],
                 ),
               )),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               GridView.builder(
               shrinkWrap: true,
               itemBuilder: (context, index) => Item(

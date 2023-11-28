@@ -21,7 +21,7 @@ class Item extends StatelessWidget {
           Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>  ItemDetails(),
+                            builder: (context) =>  ItemDetails(item:chocoItem ),
                           ));
         },
         child: Stack(
