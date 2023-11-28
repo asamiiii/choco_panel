@@ -14,22 +14,41 @@ class ItemsScreen extends StatelessWidget {
       // color:Colors.green,
       child: LayoutBuilder(
         builder: (context, constraints) {
-          return GridView.builder(
-          shrinkWrap: true,
-          itemBuilder: (context, index) => Item(
-            index: index,
-              chocoItem: DummyData
-                  .chocoList[index]),
-          itemCount:
-              DummyData.chocoList.length,
-          gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 6,
-            mainAxisSpacing: 10,
-            childAspectRatio: 0.7,
-            crossAxisSpacing: 10,
-          ),
-        );}
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              ElevatedButton(onPressed: () {
+                
+              }, 
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.amber)
+              ),
+              child: SizedBox(
+                width: 100,
+                height: 30,
+                child: Row(
+                  children: [Text('Add Item',style: TextStyle(fontWeight: FontWeight.bold),),Icon(Icons.add)],
+                ),
+              )),
+              SizedBox(height: 20,),
+              GridView.builder(
+              shrinkWrap: true,
+              itemBuilder: (context, index) => Item(
+                index: index,
+                  chocoItem: DummyData
+                      .chocoList[index]),
+              itemCount:
+                  DummyData.chocoList.length,
+              gridDelegate:
+                  const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 6,
+                mainAxisSpacing: 10,
+                childAspectRatio: 0.7,
+                crossAxisSpacing: 10,
+              ),
+        ),
+            ],
+          );}
       ),
     );
   }
