@@ -5,12 +5,10 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Expanded(
-      child: Container(
-        height: double.infinity,
-        color: Colors.red,
-        child: const Text('SettingsScreen'),
-      ),
+    return  Container(
+      height: double.infinity,
+      color: Colors.red,
+      child: const Text('SettingsScreen'),
     );
   }
 }

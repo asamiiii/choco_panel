@@ -2,8 +2,9 @@
 import 'package:choco_panel/core/colors.dart';
 import 'package:choco_panel/core/images_path.dart';
 import 'package:choco_panel/models/item_model.dart';
+import 'package:choco_panel/screens/items_screen/item_details.dart';
 import 'package:flutter/material.dart';
-
+import 'package:image_network/image_network.dart';
 // ignore: must_be_immutable
 class Item extends StatelessWidget {
   int? index;
@@ -13,13 +14,15 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      child: GestureDetector(
+      height: 250,
+      width: 200,
+      child: InkWell(
         onTap: () {
-          // Navigator.push(
-          //                 context,
-          //                 MaterialPageRoute(
-          //                   builder: (context) =>  ChocoDetailes(chocoItem: chocoItem),
-          //                 ));
+          Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>  ItemDetails(),
+                          ));
         },
         child: Stack(
           children: [
@@ -44,9 +47,7 @@ class Item extends StatelessWidget {
                 child: Hero(
                   tag:  chocoItem!.id??'',
                   child: ClipOval(
-                    child: Image.network(chocoItem?.image ?? '',loadingBuilder: (context, child, loadingProgress) => CircleAvatar(
-                          backgroundImage: AssetImage(AppImagesPath.loading),
-                          radius: 100),)
+                    child: ImageNetwork(image:chocoItem?.image ?? '',height: 150,width: 150,),
                     // CachedNetworkImage(
                     //   imageUrl: chocoItem?.image ?? '',
                     //   placeholder: (context, url) => const CircleAvatar(
@@ -60,7 +61,7 @@ class Item extends StatelessWidget {
                   ),
                 )),
             Positioned(
-                top: 140,
+                top: 160,
                 left: 20,
                 // right: 20,
                 child: Column(
@@ -76,7 +77,7 @@ class Item extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 5,
+                      height: 3,
                     ),
                     SizedBox(
                       width: 140,

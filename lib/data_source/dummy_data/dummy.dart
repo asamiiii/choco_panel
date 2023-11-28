@@ -8,7 +8,7 @@ class DummyData{
     ItemModel(
       branch:'benha,benha2',
       category: 'cat1,all',
-      discount: 'null',
+      discount: '',
       discription: ' discription discription discription discription discription',
       id: '1',
       image: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
@@ -34,7 +34,7 @@ class DummyData{
       ItemModel(
       branch:'benha',
       category: 'cat3,all',
-      discount: 'null',
+      discount: '',
       discription: ' discription discription discription discription discription',
       id: '3',
       image: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
@@ -47,7 +47,7 @@ class DummyData{
       ItemModel(
       branch:'benha',
       category: 'cat3,all',
-      discount: 'null',
+      discount: '',
       discription: ' discription discription discription discription discription',
       id: '4',
       image: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
@@ -60,7 +60,7 @@ class DummyData{
       ItemModel(
       branch:'benha',
       category: 'cat1,all',
-      discount: 'null',
+      discount: '',
       discription: ' discription discription discription discription discription',
       id: '5',
       image: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
@@ -73,7 +73,7 @@ class DummyData{
       ItemModel(
       branch:'benha',
       category: 'cat3,all',
-      discount: 'null',
+      discount: '',
       discription: ' discription discription discription discription discription',
       id: '6',
       image: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',

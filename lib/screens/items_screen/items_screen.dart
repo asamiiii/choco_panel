@@ -8,25 +8,29 @@ class ItemsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: 700,
-      width: 1000,
-      color: Colors.green,
-      child: GridView.builder(
-        shrinkWrap: true,
-        itemBuilder: (context, index) => Item(
-          index: index,
-            chocoItem: DummyData
-                .chocoList[index]),
-        itemCount:
-            DummyData.chocoList.length,
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 5,
-          mainAxisSpacing: 10,
-          childAspectRatio: 0.7,
-          crossAxisSpacing: 10,
-        ),
-      )
+      height: double.infinity,
+      width: 1300,
+      padding: const EdgeInsets.all(20),
+      // color:Colors.green,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return GridView.builder(
+          shrinkWrap: true,
+          itemBuilder: (context, index) => Item(
+            index: index,
+              chocoItem: DummyData
+                  .chocoList[index]),
+          itemCount:
+              DummyData.chocoList.length,
+          gridDelegate:
+              const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 6,
+            mainAxisSpacing: 10,
+            childAspectRatio: 0.7,
+            crossAxisSpacing: 10,
+          ),
+        );}
+      ),
     );
   }
 }
