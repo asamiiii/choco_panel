@@ -12,7 +12,7 @@ class DummyData{
       discription: ' discription discription discription discription discription',
       id: '1',
       image: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
-      imagesList: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
+      imagesList: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg,https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
       ingredients: 'ingredients igredients,ingredients:ingredients ingredients ingredients,ingredients ingredients ingredients ingredients,ingredients ingredients ingredients ingredients,ingredientsi ngredients ingredients ingredients,ingredients ingredients',
       name: 'Choco1',
       price: '10',
@@ -25,7 +25,7 @@ class DummyData{
       discription: ' discription discription discription discription discription',
       id: '2',
       image: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
-      imagesList: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg,',
+      imagesList: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg,https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
       ingredients: 'ingredients ingredients,ingredients ingredients ingredients ingredients,ingredients ingredients ingredients ,ingredients,ingredients:ingredients ingredients  ingredients,ingredients:ingredients',
       name: 'Choco2',
       price: '10',
@@ -38,7 +38,7 @@ class DummyData{
       discription: ' discription discription discription discription discription',
       id: '3',
       image: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
-      imagesList: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg,',
+      imagesList: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg,https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
       ingredients: 'ingredients ingredients,ingredients ingredients ingredients ingredients,ingredients ingredients ingredients ,ingredients,ingredients:ingredients ingredients  ingredients,ingredients:ingredients',
       name: 'Choco3',
       price: '10',
@@ -64,7 +64,7 @@ class DummyData{
       discription: ' discription discription discription discription discription',
       id: '5',
       image: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
-      imagesList: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg,',
+      imagesList: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg,https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
       ingredients: 'ingredients ingredients,ingredients ingredients ingredients ingredients,ingredients ingredients ingredients ,ingredients,ingredients:ingredients ingredients  ingredients,ingredients:ingredients',
       name: 'Choco1',
       price: '10',
@@ -77,7 +77,7 @@ class DummyData{
       discription: ' discription discription discription discription discription',
       id: '6',
       image: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
-      imagesList: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg,',
+      imagesList: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg,https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
       ingredients: 'Socker, kakaomassa, kakaosmör, glukossirap, MJÖLKPULVER, vegetabiliska oljor (palm, solros), vatten, invertsockersirap, etanol, ÄGGLIKÖR (0,82%), LAKTOS; torkad ÄGGULA (0,6%), naturlig arom, emulgeringsmedel (SOJALECITIN, lecitin), SKUMMJÖLKSPULVER, naturlig morotsarom, majsstärkelse, salt, invertas, naturlig vaniljarom, surhetreglerande medel (E330).',
       name: 'Choco3',
       price: '10',
@@ -86,10 +86,10 @@ class DummyData{
   ];
 
   static List<Announcment> announcments=[
-    // Announcment(id: '1',txt: 'The best types of chocolate'),
-    // Announcment(id: '1',txt: 'Exclusive offers for our customers'),
-    // Announcment(id: '1',txt: 'hi klkhlh hkjh '),
-    // Announcment(id: '1',txt: 'hi klkhlh hkjh '),
+    Announcment(id: '1',txt: 'The best types of chocolate',branch: 'b2'),
+    Announcment(id: '1',txt: 'Exclusive offers for our customers',branch: 'b1'),
+    Announcment(id: '1',txt: 'hi klkhlh hkjh ',branch: 'b1'),
+    Announcment(id: '1',txt: 'hi klkhlh hkjh ',branch: 'b1'),
   ];
 
  static List<String> branches = ['benha','benha2','benha3'];

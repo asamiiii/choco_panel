@@ -1,7 +1,7 @@
 import 'package:choco_panel/core/images_path.dart';
 import 'package:choco_panel/core/theme.dart';
 import 'package:choco_panel/providers/main_provider.dart';
-import 'package:choco_panel/screens/announcement_screen.dart';
+import 'package:choco_panel/screens/announcment_screen/announcement_screen.dart';
 import 'package:choco_panel/screens/items_screen/items_screen.dart';
 import 'package:choco_panel/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
@@ -39,9 +39,9 @@ class MainView extends StatelessWidget {
                   SidebarXItem(icon: Icons.announcement, label: 'Announcement',onTap: () {
                     provider.setSiderIndex(index: 1);
                   },),
-                  SidebarXItem(icon: Icons.settings, label: 'Settings',onTap: () {
-                    provider.setSiderIndex(index: 2);
-                  },),
+                  // SidebarXItem(icon: Icons.settings, label: 'Settings',onTap: () {
+                  //   provider.setSiderIndex(index: 2);
+                  // },),
                 ],
               ),
               selectedScreenIndex(provider.selectedIndex)

@@ -1,5 +1,5 @@
 import 'package:choco_panel/data_source/dummy_data/dummy.dart';
-import 'package:choco_panel/screens/items_screen/item.dart';
+import 'package:choco_panel/screens/items_screen/widgets/item.dart';
 import 'package:choco_panel/screens/items_screen/item_details.dart';
 import 'package:flutter/material.dart';
 
