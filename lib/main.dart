@@ -2,14 +2,17 @@ import 'package:choco_panel/core/providers_list.dart';
 import 'package:choco_panel/core/strings.dart';
 import 'package:choco_panel/core/theme.dart';
 import 'package:choco_panel/screens/main_view.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-void main() {
+import 'firebase_options.dart';
+
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const CohcoPanel());
-  //  MultiProvider(
-  //     providers: AppProviders.providers,
-  //     child:  const CohcoPanel(),
-  //   );
+  
 }
 
 class CohcoPanel extends StatelessWidget {
@@ -29,4 +32,3 @@ class CohcoPanel extends StatelessWidget {
     );
   }
 }
-

@@ -1,16 +1,12 @@
-import 'dart:io';
-
 import 'package:choco_panel/models/item_model.dart';
 import 'package:choco_panel/providers/main_provider.dart';
 import 'package:choco_panel/screens/items_screen/widgets/big_tf.dart';
 import 'package:choco_panel/screens/items_screen/widgets/images_section.dart';
 import 'package:choco_panel/screens/items_screen/widgets/small_text_field_section.dart';
-import 'package:choco_panel/screens/shared/shared_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:image_network/image_network.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class ItemDetails extends StatefulWidget {
   ItemModel? item;
   ItemDetails({super.key, this.item});
@@ -57,7 +53,7 @@ class _ItemDetailsState extends State<ItemDetails> {
       builder: (context, provider, child) => Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: const Text('Item Id # 125wd5f5ds54'),
+            title:  Text('Item Id # ${widget.item?.id}'),
           ),
           floatingActionButton: SizedBox(
             width: 120,
