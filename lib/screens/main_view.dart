@@ -1,11 +1,11 @@
 import 'package:choco_panel/core/images_path.dart';
+import 'package:choco_panel/core/strings.dart';
 import 'package:choco_panel/core/theme.dart';
 import 'package:choco_panel/providers/main_provider.dart';
 import 'package:choco_panel/screens/announcment_screen/announcement_screen.dart';
 import 'package:choco_panel/screens/items_screen/items_screen.dart';
 import 'package:choco_panel/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:sidebarx/sidebarx.dart';
 
@@ -33,15 +33,12 @@ class MainView extends StatelessWidget {
                 extendedTheme: AppTheme.sideTheme,
                 controller: SidebarXController(selectedIndex: provider.selectedIndex??0,extended: true),
                 items:  [
-                  SidebarXItem(icon: Icons.align_horizontal_left, label: 'Items',onTap: () {
+                  SidebarXItem(icon: Icons.align_horizontal_left, label:AppStrings.items ,onTap: () {
                     provider.setSiderIndex(index: 0);
                   },),
-                  SidebarXItem(icon: Icons.announcement, label: 'Announcement',onTap: () {
+                  SidebarXItem(icon: Icons.announcement, label:AppStrings.announcement ,onTap: () {
                     provider.setSiderIndex(index: 1);
                   },),
-                  // SidebarXItem(icon: Icons.settings, label: 'Settings',onTap: () {
-                  //   provider.setSiderIndex(index: 2);
-                  // },),
                 ],
               ),
               selectedScreenIndex(provider.selectedIndex)

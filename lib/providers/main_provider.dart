@@ -1,8 +1,7 @@
-import 'dart:io';
-
 import 'package:choco_panel/data_source/dummy_data/dummy.dart';
 import 'package:choco_panel/data_source/remote_firebase.dart';
 import 'package:choco_panel/models/announ_model.dart';
+import 'package:choco_panel/models/item_model.dart';
 import 'package:flutter/material.dart';
 
 class MainProvider extends ChangeNotifier {
@@ -11,6 +10,13 @@ class MainProvider extends ChangeNotifier {
   List<String>? categoryList = [];
   List<String> branches = [];
   List<Announcment> announcmentList = [];
+
+  bool formValid = true;
+
+  String? imageUrl;
+
+  List<String>? imagesUrl = [];
+
   TextEditingController nameC = TextEditingController();
 
   TextEditingController discriptionC = TextEditingController();
@@ -27,8 +33,39 @@ class MainProvider extends ChangeNotifier {
 
   TextEditingController nutritionDeclarationC = TextEditingController();
 
+
+
+  formValidation() {
+    if (nameC.text.isEmpty ||
+        discriptionC.text.isEmpty ||
+        categoryC.text.isEmpty ||
+        branchC.text.isEmpty ||
+        ingredientsC.text.isEmpty ||
+        nutritionDeclarationC.text.isEmpty) {
+      formValid = false;
+      notifyListeners();
+    } else {
+      formValid = true;
+      notifyListeners();
+    }
+  }
+
   setSiderIndex({required int index}) {
     selectedIndex = index;
+    notifyListeners();
+  }
+
+  Future<void> addItem(ItemModel item) async {
+    isLoading = true;
+    notifyListeners();
+    try{
+      await FirebaseHelper.addItemToFirebase(item:item);
+    }catch(error){
+      debugPrint('Error : $error');
+     isLoading = false;
+    }
+    
+    isLoading = false;
     notifyListeners();
   }
 
@@ -40,13 +77,25 @@ class MainProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<String> uploadeImageAndGetUrl()async{
+  Future<String> uploadeImageAndGetUrl() async {
     isLoading = true;
     notifyListeners();
-   var imageUrl= await FirebaseHelper.uploadImageToStorage();
-   isLoading =false;
-   notifyListeners();
-   return imageUrl??'';
+    imageUrl = await FirebaseHelper.uploadImageToStorage();
+    isLoading = false;
+
+    debugPrint('item?.image $imageUrl');
+    notifyListeners();
+    return imageUrl ?? '';
+  }
+
+  Future<void> uploadeMultiImagesAndGetUrl() async {
+    isLoading = true;
+    notifyListeners();
+    imagesUrl = await FirebaseHelper.uploadMultiImagesToStorage();
+    isLoading = false;
+
+    debugPrint('item?.image $imagesUrl');
+    notifyListeners();
   }
 
 //! Keep one item if item is found more than one time
@@ -104,5 +153,25 @@ class MainProvider extends ChangeNotifier {
     }
     isLoading = false;
     notifyListeners();
+  }
+    initTextFiledsWhenEdit(ItemModel? item) {
+    nameC = TextEditingController(text: item != null ? item.name : '');
+
+    discriptionC =
+        TextEditingController(text: item != null ? item.discription : '');
+
+    priceC = TextEditingController(text: item != null ? item.price : '');
+
+    categoryC = TextEditingController(text: item != null ? item.category : '');
+
+    branchC = TextEditingController(text: item != null ? item.branch : '');
+
+    discountC = TextEditingController(text: item != null ? item.discount : '');
+
+    ingredientsC =
+        TextEditingController(text: item != null ? item.ingredients : '');
+
+    nutritionDeclarationC = TextEditingController(
+        text: item != null ? item.nutritionDeclaration : '');
   }
 }

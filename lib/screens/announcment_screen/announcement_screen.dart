@@ -1,4 +1,5 @@
 import 'package:choco_panel/core/colors.dart';
+import 'package:choco_panel/core/strings.dart';
 import 'package:choco_panel/data_source/dummy_data/dummy.dart';
 import 'package:choco_panel/screens/items_screen/item_details.dart';
 import 'package:choco_panel/screens/shared/shared_widget.dart';
@@ -11,8 +12,6 @@ class AnnouncementScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var screenHight = MediaQuery.of(context).size.height;
-    // var screenWidth = MediaQuery.of(context).size.width*0.90;
     return Container(
       height: double.infinity,
       width: 1300,
@@ -21,7 +20,6 @@ class AnnouncementScreen extends StatelessWidget {
       child: LayoutBuilder(
           builder: (context, constraints) => Column(
                 children: [
-                  // const Text('SettingsScreen'),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -42,72 +40,73 @@ class AnnouncementScreen extends StatelessWidget {
                                       AppTextField(
                                           controller: announC,
                                           keyboardType: TextInputType.text,
-                                          icon: Icon(Icons.abc),
-                                          hintText: 'Add Announ',
-                                          label: 'Announcment'),
-                                      SizedBox(
+                                          icon: const Icon(Icons.abc),
+                                          hintText: AppStrings.addAnnouncement,
+                                          label: AppStrings.announcement),
+                                      const SizedBox(
                                         height: 20,
                                       ),
                                       AppTextField(
                                           controller: branchC,
                                           keyboardType: TextInputType.text,
-                                          icon:
-                                              Icon(Icons.location_off_rounded),
-                                          hintText: 'Add Branch',
-                                          label: 'Branch'),
+                                          icon: const Icon(
+                                              Icons.location_off_rounded),
+                                          hintText: AppStrings.addBranches,
+                                          label: AppStrings.branches),
                                     ],
                                   ),
                                 ),
                                 actions: [
                                   TextButton(
-                                    child: const Text('Edit'),
+                                    child: Text(AppStrings.edit),
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
                                   ),
                                   TextButton(
-                                    child: const Text('Cancel'),
+                                    child: Text(AppStrings.cancel),
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
                                   ),
                                 ],
-                                title: const Text('Add New Announcment'),
+                                title: Text(AppStrings.addNewAnnouncment),
                               ),
                             );
                           },
                           style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.amber)),
-                          child: const SizedBox(
+                          child: SizedBox(
                             width: 150,
                             height: 30,
                             child: Row(
                               children: [
                                 Text(
-                                  'Add Announcment',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  AppStrings.addAnnouncement,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
                                 ),
-                                Icon(Icons.add)
+                                const Icon(Icons.add)
                               ],
                             ),
                           )),
                     ],
                   ),
-                  const Row(
+                  Row(
                     children: [
                       Expanded(
                           child: Text(
-                        'Announcment',
-                        style: TextStyle(fontSize: 40),
+                        AppStrings.announcement,
+                        style: const TextStyle(fontSize: 40),
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       Expanded(
                           child: Text(
-                        'Branch',
-                        style: TextStyle(fontSize: 40),
+                        AppStrings.branches,
+                        style: const TextStyle(fontSize: 40),
                       ))
                     ],
                   ),
@@ -118,13 +117,14 @@ class AnnouncementScreen extends StatelessWidget {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return Container(
-                          
-                          padding: const EdgeInsets.only(top: 5,bottom: 5,left: 20),
+                          padding: const EdgeInsets.only(
+                              top: 5, bottom: 5, left: 20),
                           height: 50,
                           decoration: BoxDecoration(
-                            color: index.isEven ? AppColors.golden : Colors.amber,
-                            borderRadius: BorderRadius.circular(15)
-                          ),
+                              color: index.isEven
+                                  ? AppColors.golden
+                                  : Colors.amber,
+                              borderRadius: BorderRadius.circular(15)),
                           child: InkWell(
                             onTap: () {
                               TextEditingController announC =
@@ -146,8 +146,9 @@ class AnnouncementScreen extends StatelessWidget {
                                             controller: announC,
                                             keyboardType: TextInputType.text,
                                             icon: const Icon(Icons.abc),
-                                            hintText: 'Add Announ',
-                                            label: 'Announcment'),
+                                            hintText:
+                                                AppStrings.addAnnouncement,
+                                            label: AppStrings.addAnnouncement),
                                         const SizedBox(
                                           height: 20,
                                         ),
@@ -156,27 +157,27 @@ class AnnouncementScreen extends StatelessWidget {
                                             keyboardType: TextInputType.text,
                                             icon: const Icon(
                                                 Icons.location_off_rounded),
-                                            hintText: 'Add Branch',
-                                            label: 'Branch'),
+                                            hintText: AppStrings.addBranches,
+                                            label: AppStrings.branches),
                                       ],
                                     ),
                                   ),
                                   actions: [
                                     TextButton(
-                                      child: const Text('Edit'),
+                                      child: Text(AppStrings.edit),
                                       onPressed: () {
                                         //! Edit function here
                                         Navigator.of(context).pop();
                                       },
                                     ),
                                     TextButton(
-                                      child: const Text('Cancel'),
+                                      child: Text(AppStrings.cancel),
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
                                     ),
                                   ],
-                                  title: const Text('Edit Announcment'),
+                                  title: Text(AppStrings.editAnnouncement),
                                 ),
                               );
                             },

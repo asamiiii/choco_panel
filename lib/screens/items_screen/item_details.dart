@@ -1,8 +1,10 @@
+import 'package:choco_panel/core/strings.dart';
 import 'package:choco_panel/models/item_model.dart';
 import 'package:choco_panel/providers/main_provider.dart';
 import 'package:choco_panel/screens/items_screen/widgets/big_tf.dart';
 import 'package:choco_panel/screens/items_screen/widgets/images_section.dart';
 import 'package:choco_panel/screens/items_screen/widgets/small_text_field_section.dart';
+import 'package:choco_panel/screens/main_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,54 +23,53 @@ class _ItemDetailsState extends State<ItemDetails> {
   @override
   void initState() {
     var provider = context.read<MainProvider>();
-    provider.nameC = TextEditingController(
-        text: widget.item != null ? widget.item?.name : '');
-
-    provider.discriptionC = TextEditingController(
-        text: widget.item != null ? widget.item?.discription : '');
-
-    provider.priceC = TextEditingController(
-        text: widget.item != null ? widget.item?.price : '');
-
-    provider.categoryC = TextEditingController(
-        text: widget.item != null ? widget.item?.category : '');
-
-    provider.branchC = TextEditingController(
-        text: widget.item != null ? widget.item?.branch : '');
-
-    provider.discountC = TextEditingController(
-        text: widget.item != null ? widget.item?.discount : '');
-
-    provider.ingredientsC = TextEditingController(
-        text: widget.item != null ? widget.item?.ingredients : '');
-
-    provider.nutritionDeclarationC = TextEditingController(
-        text: widget.item != null ? widget.item?.nutritionDeclaration : '');
+    provider.formValid=true;
+    if(widget.item != null){
+      provider.initTextFiledsWhenEdit(widget.item);
+    }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<MainProvider>(
-      builder: (context, provider, child) => Scaffold(
+      builder: (context, provider, child) => provider.isLoading==false? Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title:  Text('Item Id # ${widget.item?.id}'),
+            title:  Text('${AppStrings.itemId} ${widget.item?.id}'),
           ),
           floatingActionButton: SizedBox(
             width: 120,
             child: FloatingActionButton(
-              onPressed: () {},
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
+              onPressed: () async{
+                String? imgesListInString = provider.imagesUrl?.join(',');
+                provider.formValidation();
+                if(provider.formValid==true){
+                 await provider.addItem(ItemModel(
+                    branch: provider.branchC.text,
+                    category: provider.categoryC.text,
+                    discount: provider.discountC.text,
+                    discription: provider.discriptionC.text,
+                    image: provider.imageUrl,
+                    imagesList: imgesListInString,
+                    ingredients: provider.ingredientsC.text,
+                    name: provider.nameC.text,
+                    nutritionDeclaration: provider.nutritionDeclarationC.text,
+                    price: provider.priceC.text,  
+                  ));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MainView(),));
+                }
+              },
+              child:  Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Edit Item'),
-                    SizedBox(
+                    Text(AppStrings.editItem),
+                    const SizedBox(
                       width: 5,
                     ),
-                    Icon(Icons.add)
+                    const Icon(Icons.add)
                   ],
                 ),
               ),
@@ -86,7 +87,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                   const SizedBox(
                     width: 30,
                   ),
-                  BigTextFields(),
+                  const BigTextFields(),
                   const SizedBox(
                     width: 30,
                   ),
@@ -97,7 +98,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                 ],
               ),
             ),
-          )),
+          )):const Center(child: CircularProgressIndicator()),
     );
   }
 }

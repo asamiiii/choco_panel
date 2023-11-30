@@ -1,3 +1,4 @@
+import 'package:choco_panel/core/strings.dart';
 import 'package:choco_panel/providers/main_provider.dart';
 import 'package:choco_panel/screens/shared/shared_widget.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +22,10 @@ class _SmallTextFieldState extends State<SmallTextFields> {
                       // height: 50,
                       width: 350,
                       child: AppTextField(
-                        label: 'Name',
+                        isValid: provider.formValid,
+                        label: AppStrings.name,
                         controller: provider.nameC,
-                        hintText: 'Item Name',
+                        hintText: AppStrings.name,
                         keyboardType: TextInputType.text,
                         icon: const Icon(Icons.abc),
                         maxLines: 1,
@@ -36,9 +38,9 @@ class _SmallTextFieldState extends State<SmallTextFields> {
                       // height: 50,
                       width: 350,
                       child: AppTextField(
-                        label: 'Price',
+                        label: AppStrings.price,
                         controller: provider.priceC,
-                        hintText: 'Price',
+                        hintText: AppStrings.price,
                         keyboardType: TextInputType.text,
                         icon: const Icon(Icons.monetization_on),
                         maxLines: 1,
@@ -51,9 +53,10 @@ class _SmallTextFieldState extends State<SmallTextFields> {
                       // height: 50,
                       width: 350,
                       child: AppTextField(
-                        label: 'Categories',
+                        isValid: provider.formValid,
+                        label: AppStrings.categories,
                         controller: provider.categoryC,
-                        hintText: 'Categories',
+                        hintText: AppStrings.categories,
                         keyboardType: TextInputType.text,
                         icon: const Icon(Icons.category),
                         maxLines: 1,
@@ -66,9 +69,10 @@ class _SmallTextFieldState extends State<SmallTextFields> {
                       // height: 50,
                       width: 350,
                       child: AppTextField(
-                        label: 'Branches',
+                        isValid: provider.formValid,
+                        label: AppStrings.branches,
                         controller: provider.branchC,
-                        hintText: 'Branches',
+                        hintText: AppStrings.branches,
                         keyboardType: TextInputType.text,
                         icon: const Icon(Icons.location_on_sharp),
                         maxLines: 1,
@@ -81,9 +85,9 @@ class _SmallTextFieldState extends State<SmallTextFields> {
                       // height: 50,
                       width: 350,
                       child: AppTextField(
-                        label: 'Discount',
+                        label: AppStrings.discount,
                         controller: provider.discountC,
-                        hintText: 'Discount',
+                        hintText: AppStrings.discount,
                         keyboardType: TextInputType.text,
                         icon: const Icon(Icons.discount_outlined),
                         maxLines: 1,
@@ -96,9 +100,10 @@ class _SmallTextFieldState extends State<SmallTextFields> {
                       // height: 80,
                       width: 350,
                       child: AppTextField(
-                        label:'Discription' ,
+                        isValid: provider.formValid,
+                        label:AppStrings.discription ,
                         controller: provider.discriptionC,
-                        hintText: 'Discription',
+                        hintText: AppStrings.discription,
                         keyboardType: TextInputType.text,
                         icon: const Icon(Icons.details_outlined),
                         maxLines: 3,

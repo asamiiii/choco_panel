@@ -1,5 +1,5 @@
+import 'package:choco_panel/core/strings.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui;
 
 // ignore: must_be_immutable
 class AppTextField extends StatelessWidget {
@@ -12,6 +12,7 @@ class AppTextField extends StatelessWidget {
   double? totalDept=0;
   bool? readOnly =false;
   String? label;
+  bool? isValid = true;
   AppTextField({
     Key? key,
     required this.controller,
@@ -22,6 +23,7 @@ class AppTextField extends StatelessWidget {
     this.isOnChange,
     this.totalDept,
     this.readOnly=false,
+    this.isValid=true,
    required this.label
 
   }) : super(key: key);
@@ -40,6 +42,7 @@ class AppTextField extends StatelessWidget {
                         textDirection: TextDirection.ltr,
                         keyboardType: keyboardType,
                         decoration: InputDecoration(
+                          errorText:isValid == false? AppErrorsStrings.requiredField : null,
                           contentPadding: const EdgeInsets.all(20.0),
                           filled: true,
                           fillColor: Colors.white,
@@ -50,8 +53,6 @@ class AppTextField extends StatelessWidget {
                           hintText: hintText,
                           hintTextDirection: TextDirection.ltr,
                           labelText: label
-                          
-                          //labelStyle: TextStyle(color: blackColor)),
                         ));
   }
 }

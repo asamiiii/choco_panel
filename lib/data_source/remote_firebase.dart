@@ -1,5 +1,4 @@
 
-import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as p;
 import 'package:choco_panel/data_source/dummy_data/dummy.dart';
@@ -8,17 +7,12 @@ import 'package:choco_panel/models/item_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
-// import 'package:path/path.dart' as p;
-// import 'package:firebase_storage/firebase_storage.dart';
-// import '../../models/dept_model.dart';
-// import '../../models/invoice_model.dart';
 
 class FirebaseHelper {
-  // static String? collectionName;
 
- static CollectionReference getInvoiceCollection() {
+ static CollectionReference getItemsCollection() {
     return FirebaseFirestore.instance
-        .collection('benha')
+        .collection('Items')
         .withConverter<ItemModel>(
           fromFirestore: (snapshot, _) => ItemModel.fromJson(snapshot.data()!),
           toFirestore: (task, _) => task.toJson(),
@@ -27,7 +21,7 @@ class FirebaseHelper {
 
   static CollectionReference getAnnouncmentCollection() {
     return FirebaseFirestore.instance
-        .collection('announcment')
+        .collection('Announcment')
         .withConverter<Announcment>(
           fromFirestore: (snapshot, _) => Announcment.fromJson(snapshot.data()!),
           toFirestore: (task, _) => task.toJson(),
@@ -36,7 +30,7 @@ class FirebaseHelper {
 
     static Future getItemsFromFirestore() async{
       DummyData.chocoList.clear();
-     var querySnapshot =await getInvoiceCollection().get();
+     var querySnapshot =await getItemsCollection().get();
     // Get data from docs and convert map to List
     for (var element in querySnapshot.docs) {
       DummyData.chocoList.add(element.data() as ItemModel);
@@ -60,28 +54,14 @@ class FirebaseHelper {
     // return querySnapshot;
   }
 
-  // Future<String> addInvoiceToFirebase(
-  //     {String? id,
-  //     required String clientName,
-  //     required double total,
-  //     required double deptTotal,
-  //     required String imageUrl,
-  //     required String notes,
-  //     required bool isDelivered,
-  //     required DateTime date}) async {
-  //   var collection = getInvoiceCollection();
-  //   var docRef = collection.doc();
-  //    await docRef.set(Invoice(
-  //       id: docRef.id,
-  //       name: clientName,
-  //       total: total,
-  //       deptTotal: deptTotal,
-  //       imageUrl: imageUrl,
-  //       isDelivered: isDelivered,
-  //       notes: notes,
-  //       date: date));
-  //       return docRef.id;
-  // }
+  static Future<String> addItemToFirebase(
+      {required ItemModel? item}) async {
+    var collection = getItemsCollection();
+    var docRef = collection.doc();
+    item?.id = docRef.id;
+     await docRef.set(item);
+        return docRef.id;
+  }
 
 // static Future<String?> uploadImageOnFirebaseStorage() async {
 //   PickedFile pickedFile =
@@ -101,6 +81,35 @@ class FirebaseHelper {
 // String url = await taskSnapshot.ref.getDownloadURL();
 //   return url;
 // }
+
+static Future<List<String>> uploadMultiImagesToStorage() async {
+  List<String> imageUrl = [];
+  List<XFile>? pickedFile = await ImagePicker().pickMultiImage();
+  debugPrint('Multi: $pickedFile');
+
+  if (kIsWeb) {
+    await Future.wait(pickedFile!.map((element) async {
+      Reference reference = FirebaseStorage.instance
+          .ref()
+          .child('images/${p.basename(element.path)}');
+
+      await reference.putData(
+        await element.readAsBytes(),
+        SettableMetadata(contentType: 'image/jpeg'),
+      );
+
+      String downloadURL = await reference.getDownloadURL();
+      imageUrl.add(downloadURL);
+      debugPrint('Add image');
+    }));
+
+    debugPrint('image length: ${imageUrl.length}');
+  } else {
+    // Write code for Android or iOS
+  }
+
+  return imageUrl;
+}
 
 
 static Future<String> uploadImageToStorage() async {

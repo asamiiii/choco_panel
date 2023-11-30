@@ -1,15 +1,14 @@
-
 import 'package:choco_panel/core/colors.dart';
-import 'package:choco_panel/core/images_path.dart';
 import 'package:choco_panel/models/item_model.dart';
 import 'package:choco_panel/screens/items_screen/item_details.dart';
 import 'package:flutter/material.dart';
 import 'package:image_network/image_network.dart';
+
 // ignore: must_be_immutable
 class Item extends StatelessWidget {
   int? index;
   ItemModel? chocoItem;
-  Item({super.key, required this.chocoItem,this.index});
+  Item({super.key, required this.chocoItem, this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +18,10 @@ class Item extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>  ItemDetails(item:chocoItem ),
-                          ));
+              context,
+              MaterialPageRoute(
+                builder: (context) => ItemDetails(item: chocoItem),
+              ));
         },
         child: Stack(
           children: [
@@ -45,19 +44,13 @@ class Item extends StatelessWidget {
                 top: 0,
                 left: 14,
                 child: Hero(
-                  tag:  chocoItem!.id??'',
+                  tag: chocoItem!.id ?? '',
                   child: ClipOval(
-                    child: ImageNetwork(image:chocoItem?.image ?? '',height: 150,width: 150,),
-                    // CachedNetworkImage(
-                    //   imageUrl: chocoItem?.image ?? '',
-                    //   placeholder: (context, url) => const CircleAvatar(
-                    //       backgroundImage: AssetImage(ImagePath.loading),
-                    //       radius: 100),
-                    //   errorWidget: (context, url, error) => const Icon(Icons.error),
-                    //   fit: BoxFit.cover,
-                    //   width: 140, // Adjust the size as needed
-                    //   height: 140,
-                    // ),
+                    child: ImageNetwork(
+                      image: chocoItem?.image ?? '',
+                      height: 150,
+                      width: 150,
+                    ),
                   ),
                 )),
             Positioned(
@@ -73,7 +66,10 @@ class Item extends StatelessWidget {
                         chocoItem?.name ?? '',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 15),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge
+                            ?.copyWith(fontSize: 15),
                       ),
                     ),
                     const SizedBox(
@@ -91,19 +87,23 @@ class Item extends StatelessWidget {
                     )
                   ],
                 )),
-    
-                chocoItem?.discount! != '' ? Positioned(
-                  bottom: 20,
-                  right: 5,
-                  child: Container(
-                  height: 30,
-                  width: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(25)
-                  ),
-                  child: Text('${chocoItem?.discount}',textAlign: TextAlign.center,style: const TextStyle(color: Colors.white),),
-                )):const SizedBox()
+            chocoItem?.discount! != ''
+                ? Positioned(
+                    bottom: 20,
+                    right: 5,
+                    child: Container(
+                      height: 30,
+                      width: 50,
+                      decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(25)),
+                      child: Text(
+                        '${chocoItem?.discount}',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ))
+                : const SizedBox()
           ],
         ),
       ),
