@@ -38,6 +38,7 @@ class FirebaseHelper {
   }
 
   static Future getAnnouncmentFromFirestore() async {
+    DummyData.announcments.clear();
     var querySnapshot = await getAnnouncmentCollection().get();
     // // Get data from docs and convert map to List
     for (var element in querySnapshot.docs) {
@@ -50,6 +51,14 @@ class FirebaseHelper {
     var docRef = collection.doc();
     item?.id = docRef.id;
     await docRef.set(item);
+    return docRef.id;
+  }
+
+  static Future<String> addAnnouncToFirebase({required Announcment? announcment}) async {
+    var collection = getAnnouncmentCollection();
+    var docRef = collection.doc();
+    announcment?.id = docRef.id;
+    await docRef.set(announcment);
     return docRef.id;
   }
 
@@ -124,6 +133,15 @@ class FirebaseHelper {
       'nutritionDeclaration': item.nutritionDeclaration
     });
   }
+  static Future<void> updateAnnouncment(
+      {required String itemID, required Announcment announ}) {
+    var collection = getAnnouncmentCollection();
+    var docRef = collection.doc(itemID);
+    return docRef.update({
+      'txt':announ.txt,
+      'branch':announ.branch
+    });
+  }
 
   static Future<void> deleteItem(String? itemId) async {
     var collection = getItemsCollection();
@@ -133,5 +151,15 @@ class FirebaseHelper {
         .delete()
         .then((value) => debugPrint("Item Deleted"))
         .catchError((error) => debugPrint("Failed to delete Item: $error"));
+  }
+
+  static Future<void> deleteAnnounc(String? announId) async {
+    var collection = getAnnouncmentCollection();
+    var docRef = collection.doc(announId);
+
+    docRef
+        .delete()
+        .then((value) => debugPrint("Announ Deleted"))
+        .catchError((error) => debugPrint("Failed to delete Announ: $error"));
   }
 }

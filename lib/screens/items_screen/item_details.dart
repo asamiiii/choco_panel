@@ -7,7 +7,9 @@ import 'package:choco_panel/screens/items_screen/widgets/item.dart';
 import 'package:choco_panel/screens/items_screen/widgets/small_text_field_section.dart';
 import 'package:choco_panel/screens/main_view.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
+import 'package:toast/toast.dart';
 
 // ignore: must_be_immutable
 class ItemDetails extends StatefulWidget {
@@ -53,9 +55,11 @@ class _ItemDetailsState extends State<ItemDetails> {
                           // set up the button
                           Widget okButton = TextButton(
                             child: const Text("OK"),
-                            onPressed: () {
-                              context.read<MainProvider>().deleteItem(itemId: widget.item?.id);
-                              Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const MainView(),));
+                            onPressed: () async{
+                              Navigator.pop(context);
+                              await context.read<MainProvider>().deleteItem(itemId: widget.item?.id);
+                              await context.read<MainProvider>().getItems();
+                              
                             },
                           );
 
@@ -104,6 +108,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                     String? imgesListInString = provider.imagesUrl?.join(',');
                     provider.formValidation();
                     if (provider.formValid == true) {
+                      Navigator.pop(context);
                       if(widget.item == null){
                          await provider.addItem(ItemModel(
                         branch: provider.branchC.text,
@@ -134,12 +139,9 @@ class _ItemDetailsState extends State<ItemDetails> {
                       ));
                       }
                       
-                      // ignore: use_build_context_synchronously
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const MainView(),
-                          ));
+                      await provider.getItems();
+                    }else{
+                      Toast.show('Please Verify Your data !!',duration: 3);
                     }
                   },
                   child: Padding(
