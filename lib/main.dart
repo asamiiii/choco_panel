@@ -5,6 +5,7 @@ import 'package:choco_panel/screens/main_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:toast/toast.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -21,6 +22,7 @@ class CohcoPanel extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);
     return MultiProvider(
       providers: AppProviders.providers,
       child: MaterialApp(
