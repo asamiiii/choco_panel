@@ -58,8 +58,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                             onPressed: () async{
                               Navigator.pop(context);
                               await context.read<MainProvider>().deleteItem(itemId: widget.item?.id);
-                              await context.read<MainProvider>().getItems();
-                              
+                              await context.read<MainProvider>().getItems();  
                             },
                           );
 
