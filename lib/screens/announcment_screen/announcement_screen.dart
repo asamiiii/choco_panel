@@ -19,6 +19,8 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
   @override
   void initState() {
     var provider = context.read<MainProvider>();
+    provider.handleCategoryItemsList();
+    provider.handleBranchesItemsList();
     provider.announcmentList.clear();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await provider.getAnnouncment();
@@ -28,6 +30,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var slecteBranchStrings = [];
     return Consumer<MainProvider>(
       builder: (context, provider, child) => provider.isLoading == false
           ? Container(
@@ -53,7 +56,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                                         builder: (context) => AlertDialog(
                                           content: SizedBox(
                                             width: 500,
-                                            height: 130,
+                                            height: 200,
                                             child: Column(
                                               children: [
                                                 AppTextField(
@@ -68,15 +71,49 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                                                 const SizedBox(
                                                   height: 20,
                                                 ),
-                                                AppTextField(
-                                                    controller: branchC,
-                                                    keyboardType:
-                                                        TextInputType.text,
-                                                    icon: const Icon(Icons
-                                                        .location_off_rounded),
-                                                    hintText:
-                                                        AppStrings.addBranches,
-                                                    label: AppStrings.branches),
+                                                Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: AppTextField(
+                                                          controller: branchC,
+                                                          keyboardType:
+                                                              TextInputType.text,
+                                                          icon: const Icon(Icons
+                                                              .location_off_rounded),
+                                                          hintText:
+                                                              AppStrings.addBranches,
+                                                          label: AppStrings.branches),
+                                                    ),
+                                                        DropdownMenu<String>(
+                                                          requestFocusOnTap: true,
+                                                          label: const Text('Branch'),
+                                                          onSelected: (branch) {
+                                                            // slecteBranchStrings = branchC.text.split(',');
+                                                            if (slecteBranchStrings.contains(branch) == false) {
+                                                              slecteBranchStrings.add(branch ?? '');
+                                                              var concatenatedString = slecteBranchStrings.join(', ');
+                                                              // provider.categoryC.text = concatenatedString ;
+                                                              debugPrint('concatenatedString : $concatenatedString');
+                                                              branchC =
+                                                                  TextEditingController(text: concatenatedString);
+                                                            }
+                                                            setState(() {});
+                                                          },
+                                                          dropdownMenuEntries: provider.branches
+                                                              .map<DropdownMenuEntry<String>>((branch) {
+                                                            return DropdownMenuEntry<String>(
+                                                              value: branch,
+                                                              label: branch,
+                                                              // enabled: color.label != 'Grey',
+                                                              style: MenuItemButton.styleFrom(
+                                                                  // foregroundColor: color.color,
+                                                                  ),
+                                                            );
+                                                          }).toList(),
+                                                        ),
+                                                  ],
+                                                ),
+                                                    
                                               ],
                                             ),
                                           ),

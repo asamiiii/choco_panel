@@ -38,11 +38,16 @@ class MainProvider extends ChangeNotifier {
 
 
   formValidation() {
+    // String word = 'hello';
+// String lastCharacter = ;
+// print(lastCharacter);
     if (nameC.text.isEmpty ||
         discriptionC.text.isEmpty ||
         categoryC.text.isEmpty ||
         branchC.text.isEmpty ||
         ingredientsC.text.isEmpty ||
+        nutritionDeclarationC.text[nutritionDeclarationC.text.length - 1]=='-'||
+        nutritionDeclarationC.text[nutritionDeclarationC.text.length - 1]==':'||
         nutritionDeclarationC.text.isEmpty||
         imageUrl==null||
         imagesUrl!.isEmpty
@@ -212,20 +217,24 @@ Future<void> editAnnouncment({required String announId,required Announcment anno
     notifyListeners();
   }
 
-  Future<String> uploadeImageAndGetUrl() async {
+  Future<void> uploadeImageAndGetUrl() async {
     isLoading = true;
     notifyListeners();
+    imageUrl='';
+    notifyListeners();
+    
     imageUrl = await FirebaseHelper.uploadImageToStorage();
     isLoading = false;
-
+    
     debugPrint('item?.image $imageUrl');
     notifyListeners();
-    return imageUrl ?? '';
+    // return imageUrl ?? '';
   }
 
   Future<void> uploadeMultiImagesAndGetUrl() async {
     isLoading = true;
     notifyListeners();
+    imagesUrl?.clear();
     imagesUrl = await FirebaseHelper.uploadMultiImagesToStorage();
     isLoading = false;
 

@@ -67,7 +67,13 @@ class _ImagesSectionState extends State<ImagesSection> {
                                         )),
                               TextButton(
                                   onPressed: () async {
+                                    // provider.imageUrl = null;
+                                    setState(() {
+                                      
+                                    });
+    // provider.imagesUrl?.clear();
                                     await provider.uploadeImageAndGetUrl();
+                                    widget.item?.image=provider.imageUrl;
                                     debugPrint(
                                         'mainImageUrl : ${provider.imageUrl}');
                                   },
@@ -86,21 +92,26 @@ class _ImagesSectionState extends State<ImagesSection> {
                                 height: 100,
                                 width: 300,
                                 child:provider.imagesUrl!.isNotEmpty ?
-                                    ListView.separated(
-                                        shrinkWrap: true,
-                                        scrollDirection: Axis.horizontal,
-                                        itemBuilder: (context, index) =>
-                                            ClipOval(
-                                                child: ImageNetwork(
-                                                    image: provider.imagesUrl![index],
-                                                    height: 100,
-                                                    width: 100)),
-                                        separatorBuilder: (context, index) =>
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                        itemCount: provider.imagesUrl!.length)
+                                    Row(
+                                      children: [
+                                        ListView.separated(
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.horizontal,
+                                            itemBuilder: (context, index) =>
+                                                ClipOval(
+                                                    child: ImageNetwork(
+                                                        image: provider.imagesUrl![index],
+                                                        height: 100,
+                                                        width: 100)),
+                                            separatorBuilder: (context, index) =>
+                                                const SizedBox(
+                                                  width: 5,
+                                                ),
+                                            itemCount: provider.imagesUrl!.length),
+                                      ],
+                                    )
                                     : const Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Icon(
                                             Icons.add_photo_alternate,
@@ -118,7 +129,12 @@ class _ImagesSectionState extends State<ImagesSection> {
                               ),
                               TextButton(
                                   onPressed: () async {
-                                    provider.uploadeMultiImagesAndGetUrl();
+                                    widget.item?.imagesList='';
+                                    await provider.uploadeMultiImagesAndGetUrl();
+                                    // provider.imagesUrl?.clear();
+
+                                    
+                                    // widget.item?.imagesList = provider.imagesUrl?.join(',');
                                   },
                                   child:  Text(AppStrings.change)),
                             ],

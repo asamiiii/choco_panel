@@ -3,11 +3,8 @@ import 'package:choco_panel/models/item_model.dart';
 import 'package:choco_panel/providers/main_provider.dart';
 import 'package:choco_panel/screens/items_screen/widgets/big_tf.dart';
 import 'package:choco_panel/screens/items_screen/widgets/images_section.dart';
-import 'package:choco_panel/screens/items_screen/widgets/item.dart';
 import 'package:choco_panel/screens/items_screen/widgets/small_text_field_section.dart';
-import 'package:choco_panel/screens/main_view.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
 
@@ -27,14 +24,15 @@ class _ItemDetailsState extends State<ItemDetails> {
   void initState() {
     var provider = context.read<MainProvider>();
     provider.formValid = true;
+    provider.handleCategoryItemsList();
+    provider.handleBranchesItemsList();
     if (widget.item != null) {
       provider.initTextFiledsWhenEdit(item: widget.item);
     } else {
       provider.initTextFiledsWhenEdit();
-      
     }
     provider.imageUrl = null;
-      provider.imagesUrl?.clear();
+    provider.imagesUrl?.clear();
 
     super.initState();
   }
@@ -46,59 +44,63 @@ class _ItemDetailsState extends State<ItemDetails> {
           ? Scaffold(
               appBar: AppBar(
                 actions: [
-                  widget.item != null? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TextButton(
-                        onPressed: () {
-                          // showAlertDialog(BuildContext context) {
+                  widget.item != null
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: TextButton(
+                              onPressed: () {
+                                // showAlertDialog(BuildContext context) {
 
-                          // set up the button
-                          Widget okButton = TextButton(
-                            child: const Text("OK"),
-                            onPressed: () async{
-                              Navigator.pop(context);
-                              await context.read<MainProvider>().deleteItem(itemId: widget.item?.id);
-                              await context.read<MainProvider>().getItems();  
-                            },
-                          );
+                                // set up the button
+                                Widget okButton = TextButton(
+                                  child: const Text("OK"),
+                                  onPressed: () async {
+                                    Navigator.pop(context);
+                                    Navigator.pop(context);
+                                    await context
+                                        .read<MainProvider>()
+                                        .deleteItem(itemId: widget.item?.id);
+                                    await context
+                                        .read<MainProvider>()
+                                        .getItems();
+                                  },
+                                );
 
-                          Widget cancelButton = TextButton(
-                            child: const Text("Cancel"),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          );
+                                Widget cancelButton = TextButton(
+                                  child: const Text("Cancel"),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                );
 
-                          // set up the AlertDialog
-                          AlertDialog alert = AlertDialog(
-                            title: Text("Are you sure ?"),
-                            content: Text("This item will remove now !"),
-                            actions: [
-                              okButton,
-                              cancelButton
-                            ],
-                          );
+                                // set up the AlertDialog
+                                AlertDialog alert = AlertDialog(
+                                  title: Text("Are you sure ?"),
+                                  content: Text("This item will remove now !"),
+                                  actions: [okButton, cancelButton],
+                                );
 
-                          // show the dialog
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return alert;
-                            },
-                          );
-                        },
-                        // },
-                        child: const Text(
-                          'Remove',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red),
-                        )),
-                  ):const SizedBox()
+                                // show the dialog
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return alert;
+                                  },
+                                );
+                              },
+                              // },
+                              child: const Text(
+                                'Remove',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red),
+                              )),
+                        )
+                      : const SizedBox()
                 ],
                 centerTitle: true,
-                title: Text('${AppStrings.itemId} ${widget.item?.id}'),
+                title: widget.item !=null ? Text('${AppStrings.itemId} ${widget.item?.id}'):const Text('Add New Item'),
               ),
               floatingActionButton: SizedBox(
                 width: 120,
@@ -108,39 +110,41 @@ class _ItemDetailsState extends State<ItemDetails> {
                     provider.formValidation();
                     if (provider.formValid == true) {
                       Navigator.pop(context);
-                      if(widget.item == null){
-                         await provider.addItem(ItemModel(
-                        branch: provider.branchC.text,
-                        category: provider.categoryC.text,
-                        discount: provider.discountC.text,
-                        discription: provider.discriptionC.text,
-                        image: provider.imageUrl,
-                        imagesList: imgesListInString,
-                        ingredients: provider.ingredientsC.text,
-                        name: provider.nameC.text,
-                        nutritionDeclaration:
-                            provider.nutritionDeclarationC.text,
-                        price: provider.priceC.text,
-                      ));
-                      }else{
-                        await provider.editItem(itemId: widget.item?.id??'',item: ItemModel(
-                        branch: provider.branchC.text,
-                        category: provider.categoryC.text,
-                        discount: provider.discountC.text,
-                        discription: provider.discriptionC.text,
-                        image: provider.imageUrl,
-                        imagesList: imgesListInString,
-                        ingredients: provider.ingredientsC.text,
-                        name: provider.nameC.text,
-                        nutritionDeclaration:
-                            provider.nutritionDeclarationC.text,
-                        price: provider.priceC.text,
-                      ));
+                      if (widget.item == null) {
+                        await provider.addItem(ItemModel(
+                          branch: provider.branchC.text,
+                          category: provider.categoryC.text,
+                          discount: provider.discountC.text,
+                          discription: provider.discriptionC.text,
+                          image: provider.imageUrl,
+                          imagesList: imgesListInString,
+                          ingredients: provider.ingredientsC.text,
+                          name: provider.nameC.text,
+                          nutritionDeclaration:
+                              provider.nutritionDeclarationC.text,
+                          price: provider.priceC.text,
+                        ));
+                      } else {
+                        await provider.editItem(
+                            itemId: widget.item?.id ?? '',
+                            item: ItemModel(
+                              branch: provider.branchC.text,
+                              category: provider.categoryC.text,
+                              discount: provider.discountC.text,
+                              discription: provider.discriptionC.text,
+                              image: provider.imageUrl,
+                              imagesList: imgesListInString,
+                              ingredients: provider.ingredientsC.text,
+                              name: provider.nameC.text,
+                              nutritionDeclaration:
+                                  provider.nutritionDeclarationC.text,
+                              price: provider.priceC.text,
+                            ));
                       }
-                      
+
                       await provider.getItems();
-                    }else{
-                      Toast.show('Please Verify Your data !!',duration: 3);
+                    } else {
+                      Toast.show('Please Verify Your data !!', duration: 3);
                     }
                   },
                   child: Padding(
@@ -154,7 +158,9 @@ class _ItemDetailsState extends State<ItemDetails> {
                         const SizedBox(
                           width: 5,
                         ),
-                        const Icon(Icons.add)
+                        Icon(widget.item != null
+                            ? Icons.edit_outlined
+                            : Icons.add)
                       ],
                     ),
                   ),
@@ -179,7 +185,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                       ImagesSection(
                         item: widget.item,
                       ),
-                      const Expanded(child: SizedBox()),
+                      // const Expanded(child: SizedBox()),
                     ],
                   ),
                 ),
