@@ -17,7 +17,9 @@ class _ItemsScreenState extends State<ItemsScreen> {
   @override
   void initState() {
     var provider = context.read<MainProvider>();
+    // DummyData.chocoList.clear();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      // DummyData.chocoList.clear();
       await provider.getItems();
     });
 

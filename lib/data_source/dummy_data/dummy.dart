@@ -86,10 +86,10 @@ class DummyData{
   ];
 
   static List<Announcment> announcments=[
-    Announcment(id: '1',txt: 'The best types of chocolate',branch: 'b2'),
-    Announcment(id: '1',txt: 'Exclusive offers for our customers',branch: 'b1'),
-    Announcment(id: '1',txt: 'hi klkhlh hkjh ',branch: 'b1'),
-    Announcment(id: '1',txt: 'hi klkhlh hkjh ',branch: 'b1'),
+    // Announcment(id: '1',txt: 'The best types of chocolate',branch: 'b2'),
+    // Announcment(id: '1',txt: 'Exclusive offers for our customers',branch: 'b1'),
+    // Announcment(id: '1',txt: 'hi klkhlh hkjh ',branch: 'b1'),
+    // Announcment(id: '1',txt: 'hi klkhlh hkjh ',branch: 'b1'),
   ];
 
  static List<String> branches = ['benha','benha2','benha3'];

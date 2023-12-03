@@ -3,6 +3,7 @@ class AppStrings{
   static String appName = 'Choco Panel';
   static String editItem = 'Edit Item';
   static String edit = 'Edit';
+  static String add = 'add';
   static String cancel = 'Cancel';
   static String addItem ='Add Item';
   static String items = 'Items';
