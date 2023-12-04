@@ -77,43 +77,61 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                                                       child: AppTextField(
                                                           controller: branchC,
                                                           keyboardType:
-                                                              TextInputType.text,
+                                                              TextInputType
+                                                                  .text,
                                                           icon: const Icon(Icons
                                                               .location_off_rounded),
-                                                          hintText:
-                                                              AppStrings.addBranches,
-                                                          label: AppStrings.branches),
+                                                          hintText: AppStrings
+                                                              .addBranches,
+                                                          label: AppStrings
+                                                              .branches),
                                                     ),
-                                                        DropdownMenu<String>(
-                                                          requestFocusOnTap: true,
-                                                          label: const Text('Branch'),
-                                                          onSelected: (branch) {
-                                                            // slecteBranchStrings = branchC.text.split(',');
-                                                            if (slecteBranchStrings.contains(branch) == false) {
-                                                              slecteBranchStrings.add(branch ?? '');
-                                                              var concatenatedString = slecteBranchStrings.join(', ');
-                                                              // provider.categoryC.text = concatenatedString ;
-                                                              debugPrint('concatenatedString : $concatenatedString');
-                                                              branchC =
-                                                                  TextEditingController(text: concatenatedString);
-                                                            }
-                                                            setState(() {});
-                                                          },
-                                                          dropdownMenuEntries: provider.branches
-                                                              .map<DropdownMenuEntry<String>>((branch) {
-                                                            return DropdownMenuEntry<String>(
-                                                              value: branch,
-                                                              label: branch,
-                                                              // enabled: color.label != 'Grey',
-                                                              style: MenuItemButton.styleFrom(
+                                                    DropdownMenu<String>(
+                                                      requestFocusOnTap: true,
+                                                      label:
+                                                          const Text('Branch'),
+                                                      onSelected: (branch) {
+                                                        slecteBranchStrings =branchC.text
+                                                                .split(',');
+                                                        if (slecteBranchStrings
+                                                                .contains(
+                                                                    branch) ==
+                                                            false) {
+                                                          slecteBranchStrings
+                                                              .add(branch
+                                                                      ?.trim() ??
+                                                                  '');
+                                                          var concatenatedString =
+                                                              slecteBranchStrings
+                                                                  .where((element) =>
+                                                                      element
+                                                                          .isNotEmpty)
+                                                                  .join(',');
+                                                          // provider.categoryC.text = concatenatedString ;
+                                                          branchC.text =
+                                                                      concatenatedString;
+                                                        }
+                                                        setState(() {});
+                                                      },
+                                                      dropdownMenuEntries:
+                                                          provider.branches.map<
+                                                                  DropdownMenuEntry<
+                                                                      String>>(
+                                                              (branch) {
+                                                        return DropdownMenuEntry<
+                                                            String>(
+                                                          value: branch,
+                                                          label: branch,
+                                                          // enabled: color.label != 'Grey',
+                                                          style: MenuItemButton
+                                                              .styleFrom(
                                                                   // foregroundColor: color.color,
                                                                   ),
-                                                            );
-                                                          }).toList(),
-                                                        ),
+                                                        );
+                                                      }).toList(),
+                                                    ),
                                                   ],
                                                 ),
-                                                    
                                               ],
                                             ),
                                           ),
@@ -250,8 +268,13 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                                                           announ: Announcment(
                                                               branch:
                                                                   branchC.text,
-                                                              txt: announC
-                                                                  .text),announId: DummyData.announcments[index].id??'');
+                                                              txt:
+                                                                  announC.text),
+                                                          announId: DummyData
+                                                                  .announcments[
+                                                                      index]
+                                                                  .id ??
+                                                              '');
                                                   await provider
                                                       .getAnnouncment();
                                                 },
@@ -272,13 +295,12 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                                         children: [
                                           Expanded(
                                               child: Text(
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
                                             '${DummyData.announcments[index].txt}',
                                             style:
                                                 const TextStyle(fontSize: 20),
                                           )),
-
                                           const SizedBox(
                                             width: 10,
                                           ),

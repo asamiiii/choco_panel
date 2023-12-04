@@ -1,8 +1,10 @@
 
 import 'package:choco_panel/core/colors.dart';
 import 'package:choco_panel/core/images_path.dart';
+import 'package:choco_panel/providers/main_provider.dart';
 import 'package:choco_panel/screens/main_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
 
 class LoginScreen extends StatefulWidget {

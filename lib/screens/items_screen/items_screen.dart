@@ -21,7 +21,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       // DummyData.chocoList.clear();
       await provider.getItems();
-      await context.read<MainProvider>().clearImagesUrlFromFireStorage();
+      // await context.read<MainProvider>().clearImagesUrlFromFireStorage();
     });
 
     super.initState();

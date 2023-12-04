@@ -55,14 +55,15 @@ class _ItemDetailsState extends State<ItemDetails> {
                                 Widget okButton = TextButton(
                                   child: const Text("OK"),
                                   onPressed: () async {
-                                    Navigator.pop(context);
-                                    Navigator.pop(context);
+                                    
                                     await context
                                         .read<MainProvider>()
                                         .deleteItem(itemId: widget.item?.id);
                                     await context
                                         .read<MainProvider>()
                                         .getItems();
+                                        Navigator.pop(context);
+                                    Navigator.pop(context);
                                   },
                                 );
 
@@ -100,12 +101,15 @@ class _ItemDetailsState extends State<ItemDetails> {
                       : const SizedBox()
                 ],
                 centerTitle: true,
-                title: widget.item !=null ? Text('${AppStrings.itemId} ${widget.item?.id}'):const Text('Add New Item'),
+                title: widget.item != null
+                    ? Text('${AppStrings.itemId} ${widget.item?.id}')
+                    : const Text('Add New Item'),
               ),
               floatingActionButton: SizedBox(
                 width: 120,
                 child: FloatingActionButton(
                   onPressed: () async {
+                    // provider.imagesUrl?.removeWhere((element) => element==''||element==' ');
                     String? imgesListInString = provider.imagesUrl?.join(',');
                     provider.formValidation();
                     if (provider.formValid == true) {
@@ -169,6 +173,7 @@ class _ItemDetailsState extends State<ItemDetails> {
               body: Padding(
                 padding: const EdgeInsets.all(20),
                 child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
                       const SizedBox(

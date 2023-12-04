@@ -51,7 +51,6 @@ class _SmallTextFieldState extends State<SmallTextFields> {
                 maxLines: 3,
               ),
             ),
-            
             const SizedBox(
               height: 20,
             ),
@@ -78,13 +77,23 @@ class _SmallTextFieldState extends State<SmallTextFields> {
                   label: const Text('Cat'),
                   onSelected: (cat) {
                     slecteCatStrings = provider.categoryC.text.split(',');
-                    if (slecteCatStrings.contains(cat) == false) {
-                      slecteCatStrings.add(cat ?? '');
-                      var concatenatedString = slecteCatStrings.join(', ');
-                      // provider.categoryC.text = concatenatedString ;
+
+                    // Check if the selected category is already in the list
+                    if (!slecteCatStrings.contains(cat)) {
+                      // Remove any leading or trailing whitespace from the selected category
+                      cat = cat?.trim();
+
+                      // Add the selected category to the list
+                      slecteCatStrings.add(cat!);
+
+                      // Join the categories with commas, excluding any empty strings
+                      var concatenatedString =
+                          slecteCatStrings.where((c) => c.isNotEmpty).join(',');
+
                       provider.categoryC =
                           TextEditingController(text: concatenatedString);
                     }
+
                     setState(() {});
                   },
                   dropdownMenuEntries: provider.categoryList!
@@ -119,7 +128,9 @@ class _SmallTextFieldState extends State<SmallTextFields> {
                     maxLines: 1,
                   ),
                 ),
-                SizedBox(width: 15,),
+                SizedBox(
+                  width: 15,
+                ),
                 Expanded(
                   child: DropdownMenu<String>(
                     requestFocusOnTap: true,
@@ -127,11 +138,10 @@ class _SmallTextFieldState extends State<SmallTextFields> {
                     onSelected: (branch) {
                       slecteBranchStrings = provider.branchC.text.split(',');
                       if (slecteBranchStrings.contains(branch) == false) {
-                        slecteBranchStrings.add(branch ?? '');
-                        var concatenatedString = slecteBranchStrings.join(', ');
+                        slecteBranchStrings.add(branch?.trim() ?? '');
+                        var concatenatedString = slecteBranchStrings.where((element) => element.isNotEmpty).join(',');
                         // provider.categoryC.text = concatenatedString ;
-                        provider.branchC =
-                            TextEditingController(text: concatenatedString);
+                        provider.branchC.text=concatenatedString;
                       }
                       setState(() {});
                     },

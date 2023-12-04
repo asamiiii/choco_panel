@@ -116,6 +116,26 @@ class FirebaseHelper {
     return imageUrl;
   }
 
+  static Future<List<String>> getAllImageUrls() async {
+  List<String> imageUrls = [];
+  
+  // Reference to your Firebase Storage bucket
+  FirebaseStorage storage = FirebaseStorage.instance;
+  Reference storageRef = storage.ref('images/');
+  
+  // List all items (files) in the bucket
+  ListResult result = await storageRef.listAll();
+  
+  // Iterate through each item and add the download URL to the list
+  for (Reference ref in result.items) {
+    String downloadUrl = await ref.getDownloadURL();
+    imageUrls.add(downloadUrl);
+  }
+  debugPrint('imageUrls : ${imageUrls.length}');
+  
+  return imageUrls;
+}
+
   static Future<void> updateItem(
       {required String itemID, required ItemModel item}) {
     var collection = getItemsCollection();
