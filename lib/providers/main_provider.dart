@@ -119,31 +119,15 @@ class MainProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> deleteItem({required String? itemId}) async {
+  Future<void> getAnnouncment() async {
+    announcmentList.clear();
+    DummyData.announcments.clear();
     isLoading = true;
-    bool haveErro = false;
     notifyListeners();
-    try {
-      await FirebaseHelper.deleteItem(itemId);
-    } catch (error) {
-      debugPrint('Error : $error');
-      haveErro = true;
-      isLoading = false;
-      notifyListeners();
+    await FirebaseHelper.getAnnouncmentFromFirestore();
+    for (var element in DummyData.announcments) {
+      announcmentList.add(element);
     }
-
-    if (haveErro == true) {
-      Toast.show('Error when delete the data',
-          duration: 5,
-          gravity: Toast.bottom,
-          backgroundColor: HexColor("#FF0000"));
-    } else {
-      Toast.show('Item is deleted Sucssesfully',
-          duration: 5,
-          gravity: Toast.bottom,
-          backgroundColor: HexColor("#FF0000"));
-    }
-
     isLoading = false;
     notifyListeners();
   }
@@ -177,13 +161,13 @@ class MainProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> editItem(
-      {required String itemId, required ItemModel item}) async {
+  Future<void> editAnnouncment(
+      {required String announId, required Announcment announ}) async {
     isLoading = true;
     bool haveErro = false;
     notifyListeners();
     try {
-      await FirebaseHelper.updateItem(item: item, itemID: itemId);
+      await FirebaseHelper.updateAnnouncment(announ: announ, itemID: announId);
     } catch (error) {
       debugPrint('Error : $error');
       haveErro = true;
@@ -203,13 +187,42 @@ class MainProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> editAnnouncment(
-      {required String announId, required Announcment announ}) async {
+  Future<void> deleteItem({required String? itemId}) async {
     isLoading = true;
     bool haveErro = false;
     notifyListeners();
     try {
-      await FirebaseHelper.updateAnnouncment(announ: announ, itemID: announId);
+      await FirebaseHelper.deleteItem(itemId);
+    } catch (error) {
+      debugPrint('Error : $error');
+      haveErro = true;
+      isLoading = false;
+      notifyListeners();
+    }
+
+    if (haveErro == true) {
+      Toast.show('Error when delete the data',
+          duration: 5,
+          gravity: Toast.bottom,
+          backgroundColor: HexColor("#FF0000"));
+    } else {
+      Toast.show('Item is deleted Sucssesfully',
+          duration: 5,
+          gravity: Toast.bottom,
+          backgroundColor: HexColor("#FF0000"));
+    }
+
+    isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> editItem(
+      {required String itemId, required ItemModel item}) async {
+    isLoading = true;
+    bool haveErro = false;
+    notifyListeners();
+    try {
+      await FirebaseHelper.updateItem(item: item, itemID: itemId);
     } catch (error) {
       debugPrint('Error : $error');
       haveErro = true;
@@ -325,19 +338,6 @@ class MainProvider extends ChangeNotifier {
       return element.category!.contains(categoryTxt ?? '') &&
           element.branch!.contains(branch ?? '');
     }).toList();
-    notifyListeners();
-  }
-
-  Future<void> getAnnouncment() async {
-    announcmentList.clear();
-    DummyData.announcments.clear();
-    isLoading = true;
-    notifyListeners();
-    await FirebaseHelper.getAnnouncmentFromFirestore();
-    for (var element in DummyData.announcments) {
-      announcmentList.add(element);
-    }
-    isLoading = false;
     notifyListeners();
   }
 
