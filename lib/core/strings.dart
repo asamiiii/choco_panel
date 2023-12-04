@@ -4,6 +4,7 @@ class AppStrings{
   static String editItem = 'Edit Item';
   static String edit = 'Edit';
   static String add = 'add';
+  static String remove = 'Remove';
   static String cancel = 'Cancel';
   static String addItem ='Add Item';
   static String items = 'Items';
@@ -26,9 +27,16 @@ class AppStrings{
   static String itemId = 'Item Id # ';
   static String enterPassword='Enter Your Password';
   static String login ='Login';
+  static String ok = 'Ok';
 }
 
 class AppErrorsStrings{
   static String requiredField = 'This feild is required';
   static String loginFailed ='Login Failed !!';
+}
+
+class AppMessagesStrings{
+  static String thisAnnounWillRemoveNow='This Announ will remove now !';
+  static String areYouSure = 'Are you sure ?';
+  static String pleaseVerifyYourData='Please Verify Your data !!';
 }

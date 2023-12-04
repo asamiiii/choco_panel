@@ -74,7 +74,7 @@ class _SmallTextFieldState extends State<SmallTextFields> {
                 ),
                 DropdownMenu<String>(
                   requestFocusOnTap: true,
-                  label: const Text('Cat'),
+                  label: Text(AppStrings.categories),
                   onSelected: (cat) {
                     slecteCatStrings = provider.categoryC.text.split(',');
 
@@ -101,10 +101,6 @@ class _SmallTextFieldState extends State<SmallTextFields> {
                     return DropdownMenuEntry<String>(
                       value: cat,
                       label: cat,
-                      // enabled: color.label != 'Grey',
-                      style: MenuItemButton.styleFrom(
-                          // foregroundColor: color.color,
-                          ),
                     );
                   }).toList(),
                 ),
@@ -128,13 +124,13 @@ class _SmallTextFieldState extends State<SmallTextFields> {
                     maxLines: 1,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 15,
                 ),
                 Expanded(
                   child: DropdownMenu<String>(
                     requestFocusOnTap: true,
-                    label: const Text('Branch'),
+                    label: Text(AppStrings.branches),
                     onSelected: (branch) {
                       slecteBranchStrings = provider.branchC.text.split(',');
                       if (slecteBranchStrings.contains(branch) == false) {
@@ -150,10 +146,6 @@ class _SmallTextFieldState extends State<SmallTextFields> {
                       return DropdownMenuEntry<String>(
                         value: branch,
                         label: branch,
-                        // enabled: color.label != 'Grey',
-                        style: MenuItemButton.styleFrom(
-                            // foregroundColor: color.color,
-                            ),
                       );
                     }).toList(),
                   ),
@@ -164,7 +156,6 @@ class _SmallTextFieldState extends State<SmallTextFields> {
               height: 20,
             ),
             SizedBox(
-              // height: 50,
               width: 350,
               child: AppTextField(
                 label: AppStrings.discount,
@@ -179,7 +170,6 @@ class _SmallTextFieldState extends State<SmallTextFields> {
               height: 20,
             ),
             SizedBox(
-              // height: 50,
               width: 350,
               child: AppTextField(
                 label: AppStrings.price,

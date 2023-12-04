@@ -87,10 +87,11 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                                                     ),
                                                     DropdownMenu<String>(
                                                       requestFocusOnTap: true,
-                                                      label:
-                                                          const Text('Branch'),
+                                                      label: Text(
+                                                          AppStrings.branches),
                                                       onSelected: (branch) {
-                                                        slecteBranchStrings =branchC.text
+                                                        slecteBranchStrings =
+                                                            branchC.text
                                                                 .split(',');
                                                         if (slecteBranchStrings
                                                                 .contains(
@@ -108,7 +109,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                                                                   .join(',');
                                                           // provider.categoryC.text = concatenatedString ;
                                                           branchC.text =
-                                                                      concatenatedString;
+                                                              concatenatedString;
                                                         }
                                                         setState(() {});
                                                       },
@@ -312,7 +313,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                                           TextButton(
                                               onPressed: () {
                                                 Widget okButton = TextButton(
-                                                  child: const Text("OK"),
+                                                  child: Text(AppStrings.ok),
                                                   onPressed: () {
                                                     Navigator.pop(context);
                                                     context
@@ -330,7 +331,8 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
 
                                                 Widget cancelButton =
                                                     TextButton(
-                                                  child: const Text("Cancel"),
+                                                  child:
+                                                      Text(AppStrings.cancel),
                                                   onPressed: () {
                                                     Navigator.pop(context);
                                                   },
@@ -338,9 +340,9 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
 
                                                 // set up the AlertDialog
                                                 AlertDialog alert = AlertDialog(
-                                                  title: Text("Are you sure ?"),
-                                                  content: Text(
-                                                      "This Announ will remove now !"),
+                                                  title: Text(
+                                                      AppMessagesStrings.areYouSure),
+                                                  content: Text(AppMessagesStrings.thisAnnounWillRemoveNow),
                                                   actions: [
                                                     okButton,
                                                     cancelButton
@@ -356,9 +358,9 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                                                   },
                                                 );
                                               },
-                                              child: const Text(
-                                                'Remove',
-                                                style: TextStyle(
+                                              child: Text(
+                                                AppStrings.remove,
+                                                style: const TextStyle(
                                                     color: Colors.red,
                                                     fontWeight:
                                                         FontWeight.bold),

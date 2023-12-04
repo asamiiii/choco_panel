@@ -148,7 +148,7 @@ class _ItemDetailsState extends State<ItemDetails> {
 
                       await provider.getItems();
                     } else {
-                      Toast.show('Please Verify Your data !!', duration: 3);
+                      Toast.show(AppMessagesStrings.pleaseVerifyYourData, duration: 3);
                     }
                   },
                   child: Padding(
