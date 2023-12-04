@@ -35,8 +35,6 @@ class MainProvider extends ChangeNotifier {
 
   TextEditingController nutritionDeclarationC = TextEditingController();
 
-
-
   formValidation() {
     // String word = 'hello';
 // String lastCharacter = ;
@@ -46,12 +44,13 @@ class MainProvider extends ChangeNotifier {
         categoryC.text.isEmpty ||
         branchC.text.isEmpty ||
         ingredientsC.text.isEmpty ||
-        nutritionDeclarationC.text[nutritionDeclarationC.text.length - 1]=='-'||
-        nutritionDeclarationC.text[nutritionDeclarationC.text.length - 1]==':'||
-        nutritionDeclarationC.text.isEmpty||
-        imageUrl==null||
-        imagesUrl!.isEmpty
-        ) {
+        nutritionDeclarationC.text[nutritionDeclarationC.text.length - 1] ==
+            '-' ||
+        nutritionDeclarationC.text[nutritionDeclarationC.text.length - 1] ==
+            ':' ||
+        nutritionDeclarationC.text.isEmpty ||
+        imageUrl == null ||
+        imagesUrl!.isEmpty) {
       formValid = false;
       notifyListeners();
     } else {
@@ -69,22 +68,25 @@ class MainProvider extends ChangeNotifier {
     isLoading = true;
     bool haveErro = false;
     notifyListeners();
-    try{
-      await FirebaseHelper.addItemToFirebase(item:item);
-      
-    }catch(error){
+    try {
+      await FirebaseHelper.addItemToFirebase(item: item);
+    } catch (error) {
       debugPrint('Error : $error');
       haveErro = true;
-     isLoading = false;
-     notifyListeners();
+      isLoading = false;
+      notifyListeners();
     }
 
-    if(haveErro == true){
-      Toast.show('Error when adding the data', duration: 5, gravity: Toast.bottom,backgroundColor: HexColor("#FF0000"));
-    }else{
-      Toast.show('Item is added Sucssesfully', duration: 5, gravity: Toast.bottom);
+    if (haveErro == true) {
+      Toast.show('Error when adding the data',
+          duration: 5,
+          gravity: Toast.bottom,
+          backgroundColor: HexColor("#FF0000"));
+    } else {
+      Toast.show('Item is added Sucssesfully',
+          duration: 5, gravity: Toast.bottom);
     }
-    
+
     isLoading = false;
     notifyListeners();
   }
@@ -93,22 +95,25 @@ class MainProvider extends ChangeNotifier {
     isLoading = true;
     bool haveErro = false;
     notifyListeners();
-    try{
-      await FirebaseHelper.addAnnouncToFirebase(announcment:announcment);
-      
-    }catch(error){
+    try {
+      await FirebaseHelper.addAnnouncToFirebase(announcment: announcment);
+    } catch (error) {
       debugPrint('Error : $error');
       haveErro = true;
-     isLoading = false;
-     notifyListeners();
+      isLoading = false;
+      notifyListeners();
     }
 
-    if(haveErro == true){
-      Toast.show('Error when adding the data', duration: 5, gravity: Toast.bottom,backgroundColor: HexColor("#FF0000"));
-    }else{
-      Toast.show('Announcment is added Sucssesfully', duration: 5, gravity: Toast.bottom);
+    if (haveErro == true) {
+      Toast.show('Error when adding the data',
+          duration: 5,
+          gravity: Toast.bottom,
+          backgroundColor: HexColor("#FF0000"));
+    } else {
+      Toast.show('Announcment is added Sucssesfully',
+          duration: 5, gravity: Toast.bottom);
     }
-    
+
     isLoading = false;
     notifyListeners();
   }
@@ -117,98 +122,112 @@ class MainProvider extends ChangeNotifier {
     isLoading = true;
     bool haveErro = false;
     notifyListeners();
-    try{
+    try {
       await FirebaseHelper.deleteItem(itemId);
-      
-    }catch(error){
+    } catch (error) {
       debugPrint('Error : $error');
       haveErro = true;
-     isLoading = false;
-     notifyListeners();
+      isLoading = false;
+      notifyListeners();
     }
 
-    if(haveErro == true){
-      Toast.show('Error when delete the data', duration: 5, gravity: Toast.bottom,backgroundColor: HexColor("#FF0000"));
-    }else{
-      Toast.show('Item is deleted Sucssesfully', duration: 5, gravity: Toast.bottom,backgroundColor: HexColor("#FF0000"));
+    if (haveErro == true) {
+      Toast.show('Error when delete the data',
+          duration: 5,
+          gravity: Toast.bottom,
+          backgroundColor: HexColor("#FF0000"));
+    } else {
+      Toast.show('Item is deleted Sucssesfully',
+          duration: 5,
+          gravity: Toast.bottom,
+          backgroundColor: HexColor("#FF0000"));
     }
-    
+
     isLoading = false;
     notifyListeners();
   }
 
-   Future<void> deleteAnnouncment({required String? announId}) async {
+  Future<void> deleteAnnouncment({required String? announId}) async {
     isLoading = true;
     bool haveErro = false;
     notifyListeners();
-    try{
+    try {
       await FirebaseHelper.deleteAnnounc(announId);
-      
-    }catch(error){
+    } catch (error) {
       debugPrint('Error : $error');
       haveErro = true;
-     isLoading = false;
-     notifyListeners();
+      isLoading = false;
+      notifyListeners();
     }
 
-    if(haveErro == true){
-      Toast.show('Error when delete the data', duration: 5, gravity: Toast.bottom,backgroundColor: HexColor("#FF0000"));
-    }else{
-      Toast.show('Item is deleted Sucssesfully', duration: 5, gravity: Toast.bottom,backgroundColor: HexColor("#FF0000"));
+    if (haveErro == true) {
+      Toast.show('Error when delete the data',
+          duration: 5,
+          gravity: Toast.bottom,
+          backgroundColor: HexColor("#FF0000"));
+    } else {
+      Toast.show('Item is deleted Sucssesfully',
+          duration: 5,
+          gravity: Toast.bottom,
+          backgroundColor: HexColor("#FF0000"));
     }
-    
+
     isLoading = false;
     notifyListeners();
   }
 
-  Future<void> editItem({required String itemId,required ItemModel item}) async {
+  Future<void> editItem(
+      {required String itemId, required ItemModel item}) async {
     isLoading = true;
     bool haveErro = false;
     notifyListeners();
-    try{
-      await FirebaseHelper.updateItem(item: item,itemID: itemId);
-      
-    }catch(error){
+    try {
+      await FirebaseHelper.updateItem(item: item, itemID: itemId);
+    } catch (error) {
       debugPrint('Error : $error');
       haveErro = true;
-     isLoading = false;
-     notifyListeners();
+      isLoading = false;
+      notifyListeners();
     }
 
-    if(haveErro == true){
-      Toast.show('Error when Update the data', duration: 5, gravity: Toast.bottom);
-    }else{
-      Toast.show('Item is Updated Sucssesfully', duration: 5, gravity: Toast.bottom);
+    if (haveErro == true) {
+      Toast.show('Error when Update the data',
+          duration: 5, gravity: Toast.bottom);
+    } else {
+      Toast.show('Item is Updated Sucssesfully',
+          duration: 5, gravity: Toast.bottom);
     }
-    
+
     isLoading = false;
     notifyListeners();
   }
 
-
-Future<void> editAnnouncment({required String announId,required Announcment announ}) async {
+  Future<void> editAnnouncment(
+      {required String announId, required Announcment announ}) async {
     isLoading = true;
     bool haveErro = false;
     notifyListeners();
-    try{
-      await FirebaseHelper.updateAnnouncment(announ:announ,itemID: announId );
-      
-    }catch(error){
+    try {
+      await FirebaseHelper.updateAnnouncment(announ: announ, itemID: announId);
+    } catch (error) {
       debugPrint('Error : $error');
       haveErro = true;
-     isLoading = false;
-     notifyListeners();
+      isLoading = false;
+      notifyListeners();
     }
 
-    if(haveErro == true){
-      Toast.show('Error when Update the data', duration: 5, gravity: Toast.bottom);
-    }else{
-      Toast.show('Item is Updated Sucssesfully', duration: 5, gravity: Toast.bottom);
+    if (haveErro == true) {
+      Toast.show('Error when Update the data',
+          duration: 5, gravity: Toast.bottom);
+    } else {
+      Toast.show('Item is Updated Sucssesfully',
+          duration: 5, gravity: Toast.bottom);
     }
-    
+
     isLoading = false;
     notifyListeners();
   }
+
   getItems() async {
     isLoading = true;
     notifyListeners();
@@ -220,15 +239,39 @@ Future<void> editAnnouncment({required String announId,required Announcment anno
   Future<void> uploadeImageAndGetUrl() async {
     isLoading = true;
     notifyListeners();
-    imageUrl='';
+    imageUrl = '';
     notifyListeners();
-    
+
     imageUrl = await FirebaseHelper.uploadImageToStorage();
     isLoading = false;
-    
+
     debugPrint('item?.image $imageUrl');
     notifyListeners();
     // return imageUrl ?? '';
+  }
+
+  clearImagesUrlFromFireStorage() async {
+    List<String> imgesList = await FirebaseHelper.getAllImageUrls();
+    //  debugPrint('delete this image url :');
+    for(int i=0;i<=imgesList.length;i++){
+      debugPrint('index = $i');
+      debugPrint('index');
+      for (var item in DummyData.chocoList) {
+        debugPrint('choco index');
+        if (item.image != imgesList[i]) {
+          debugPrint('delete this image url : ${imgesList[i]}');
+        }
+        item.imagesList?.split(',').forEach((element) {
+          debugPrint('item images index');
+          if (element != imgesList[i]) {
+            debugPrint('delete this image url : ${imgesList[i]}');
+          }
+        });
+      }
+    }
+    // for (var storageImage in imgesList) {
+      
+    // }
   }
 
   Future<void> uploadeMultiImagesAndGetUrl() async {
@@ -259,7 +302,7 @@ Future<void> editAnnouncment({required String announId,required Announcment anno
   void handleCategoryItemsList() {
     for (var element in DummyData.chocoList) {
       /*---> split the cat list <---*/
-      var splitted = element.category?.split(',');
+      var splitted = element.category?.trim().split(',');
       categoryList?.addAll(splitted ?? []);
     }
     categoryList = keepOneInstance(categoryList);
@@ -301,8 +344,7 @@ Future<void> editAnnouncment({required String announId,required Announcment anno
     notifyListeners();
   }
 
-  
-    initTextFiledsWhenEdit({ItemModel? item}) {
+  initTextFiledsWhenEdit({ItemModel? item}) {
     nameC = TextEditingController(text: item != null ? item.name : '');
 
     discriptionC =
