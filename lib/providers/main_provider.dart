@@ -1,4 +1,5 @@
 import 'package:choco_panel/data_source/dummy_data/dummy.dart';
+import 'package:choco_panel/data_source/fire_storage.dart';
 import 'package:choco_panel/data_source/remote_firebase.dart';
 import 'package:choco_panel/models/announ_model.dart';
 import 'package:choco_panel/models/item_model.dart';
@@ -242,7 +243,7 @@ class MainProvider extends ChangeNotifier {
     imageUrl = '';
     notifyListeners();
 
-    imageUrl = await FirebaseHelper.uploadImageToStorage();
+    imageUrl = await FireStorage.uploadImageToStorage();
     isLoading = false;
 
     debugPrint('item?.image $imageUrl');
@@ -251,7 +252,7 @@ class MainProvider extends ChangeNotifier {
   }
 
   clearImagesUrlFromFireStorage() async {
-    List<String> imgesList = await FirebaseHelper.getAllImageUrls();
+    List<String> imgesList = await FireStorage.getAllImageUrls();
     List<String> localImageUrls = [/* List of local image URLs */];
 
 // Find unused images in Firebase Storage
@@ -274,7 +275,7 @@ class MainProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     imagesUrl?.clear();
-    imagesUrl = await FirebaseHelper.uploadMultiImagesToStorage();
+    imagesUrl = await FireStorage.uploadMultiImagesToStorage();
     isLoading = false;
 
     debugPrint('item?.image $imagesUrl');

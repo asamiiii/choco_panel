@@ -3,7 +3,6 @@ import 'package:choco_panel/core/strings.dart';
 import 'package:choco_panel/data_source/dummy_data/dummy.dart';
 import 'package:choco_panel/models/announ_model.dart';
 import 'package:choco_panel/providers/main_provider.dart';
-import 'package:choco_panel/screens/main_view.dart';
 import 'package:choco_panel/screens/shared/shared_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

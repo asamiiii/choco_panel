@@ -2,7 +2,6 @@ import 'package:choco_panel/core/providers_list.dart';
 import 'package:choco_panel/core/strings.dart';
 import 'package:choco_panel/core/theme.dart';
 import 'package:choco_panel/screens/login_screen.dart';
-import 'package:choco_panel/screens/main_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

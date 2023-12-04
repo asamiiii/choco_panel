@@ -1,10 +1,9 @@
 
 import 'package:choco_panel/core/colors.dart';
 import 'package:choco_panel/core/images_path.dart';
-import 'package:choco_panel/providers/main_provider.dart';
+import 'package:choco_panel/core/strings.dart';
 import 'package:choco_panel/screens/main_view.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -33,10 +32,6 @@ TextEditingController codeController = TextEditingController();
       '87654321'
     ];
     return   Scaffold(
-      // floatingActionButton: FloatingActionButton(onPressed: (){},
-      // child: const Text('Login Login')
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
       body: Padding(
         padding: const EdgeInsets.only(top: 50,left: 20,right: 20),
         child: SingleChildScrollView(
@@ -56,9 +51,9 @@ TextEditingController codeController = TextEditingController();
                child:  TextFormField(
                 obscureText: true,
                 controller: codeController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter Your Password',
+                decoration:  InputDecoration(
+                  border: const OutlineInputBorder(),
+                  hintText: AppStrings.enterPassword,
                 ),
                        ),
              ),
@@ -68,13 +63,13 @@ TextEditingController codeController = TextEditingController();
                 if(passList.contains(codeController.text)){
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MainView(),));
                 }else{
-                  Toast.show('Login Failed !!');
+                  Toast.show(AppErrorsStrings.loginFailed);
                 }
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(AppColors.golden)
               ), 
-              child:  Text('Login',style:Theme.of(context).textTheme.bodySmall ,),
+              child:  Text(AppStrings.login,style:Theme.of(context).textTheme.bodySmall ,),
               )
             ],
           ),

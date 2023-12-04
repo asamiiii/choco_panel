@@ -24,8 +24,11 @@ class AppStrings{
   static String detailsImages='Details Images';
   static String change = 'Change';
   static String itemId = 'Item Id # ';
+  static String enterPassword='Enter Your Password';
+  static String login ='Login';
 }
 
 class AppErrorsStrings{
   static String requiredField = 'This feild is required';
+  static String loginFailed ='Login Failed !!';
 }
