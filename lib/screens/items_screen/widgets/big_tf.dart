@@ -29,7 +29,7 @@ class BigTextFields extends StatelessWidget {
                 // height: 150,
                 width: 350,
                 child: AppTextField(
-                  isValid: provider.formValid,
+                  isValid: provider.ingredientsValid,
                   label: AppStrings.ingredients,
                   controller: provider.ingredientsC,
                   hintText:AppStrings.ingredients,
@@ -45,7 +45,7 @@ class BigTextFields extends StatelessWidget {
                 // height: 150,
                 width: 350,
                 child: AppTextField(
-                  isValid: provider.formValid,
+                  // isValid: provider.formValid,
                   label:AppStrings.nutritionDeclaration ,
                   controller: provider.nutritionDeclarationC,
                   hintText: AppStrings.nutritionDeclaration,

@@ -30,7 +30,7 @@ class _SmallTextFieldState extends State<SmallTextFields> {
                 // height: 50,
                 width: 350,
                 child: AppTextField(
-                  isValid: provider.formValid,
+                  isValid: provider.nameValid,
                   label: AppStrings.name,
                   controller: provider.nameC,
                   hintText: AppStrings.name,
@@ -46,7 +46,7 @@ class _SmallTextFieldState extends State<SmallTextFields> {
                 // height: 80,
                 width: 350,
                 child: AppTextField(
-                  isValid: provider.formValid,
+                  isValid: provider.discriptionValid,
                   label: AppStrings.discription,
                   controller: provider.discriptionC,
                   hintText: AppStrings.discription,
@@ -65,7 +65,7 @@ class _SmallTextFieldState extends State<SmallTextFields> {
                       // height: 100,
                       width: 350,
                       child: AppTextField(
-                        isValid: provider.formValid,
+                        isValid: provider.categoryValid,
                         label: AppStrings.categories,
                         controller: provider.categoryC,
                         hintText: AppStrings.categories,
@@ -125,7 +125,7 @@ class _SmallTextFieldState extends State<SmallTextFields> {
                       // height: 100,
                       width: 350,
                       child: AppTextField(
-                        isValid: provider.formValid,
+                        isValid: provider.branchValid,
                         label: AppStrings.branches,
                         controller: provider.branchC,
                         hintText: AppStrings.branches,

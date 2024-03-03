@@ -13,12 +13,17 @@ class MainProvider extends ChangeNotifier {
   List<String>? categoryList = [];
   List<String> branches = [];
   List<Announcment> announcmentList = [];
+  String? imageUrl;
+  List<String>? imagesUrl = [];
 
   bool formValid = true;
-
-  String? imageUrl;
-
-  List<String>? imagesUrl = [];
+  bool nameValid = true;
+  bool discriptionValid = true;
+  bool categoryValid = true;
+  bool branchValid = true;
+  bool ingredientsValid = true;
+  bool imageUrlValid = true;
+  bool imagesUrlValid = true;
 
   TextEditingController nameC = TextEditingController();
 
@@ -40,24 +45,70 @@ class MainProvider extends ChangeNotifier {
     // String word = 'hello';
 // String lastCharacter = ;
 // print(lastCharacter);
-    if (nameC.text.isEmpty ||
-        discriptionC.text.isEmpty ||
-        categoryC.text.isEmpty ||
-        branchC.text.isEmpty ||
-        ingredientsC.text.isEmpty ||
-        nutritionDeclarationC.text[nutritionDeclarationC.text.length - 1] ==
-            '-' ||
-        nutritionDeclarationC.text[nutritionDeclarationC.text.length - 1] ==
-            ':' ||
-        nutritionDeclarationC.text.isEmpty ||
-        imageUrl == null ||
-        imagesUrl!.isEmpty) {
-      formValid = false;
+    if (nameC.text.isEmpty) {
+      nameValid = false;
+      formValid =false;
       notifyListeners();
-    } else {
-      formValid = true;
+    }else{
+      formValid =true;
       notifyListeners();
     }
+
+
+    if (discriptionC.text.isEmpty) {
+      discriptionValid = false;
+      formValid =false;
+      notifyListeners();
+    }else{
+      formValid =true;
+      notifyListeners();
+    }
+
+    if (categoryC.text.isEmpty) {
+      categoryValid = false;
+      formValid =false;
+      notifyListeners();
+    }else{
+      formValid =true;
+      notifyListeners();
+    }
+
+    if (branchC.text.isEmpty) {
+      branchValid = false;
+      formValid =false;
+      notifyListeners();
+    }else{
+      formValid =true;
+      notifyListeners();
+    }
+
+    if(ingredientsC.text.isEmpty){
+      ingredientsValid=false;
+      formValid =false;
+      notifyListeners();
+    }else{
+      formValid =true;
+      notifyListeners();
+    }
+
+    if(imageUrl==null){
+      imageUrlValid=false;
+      formValid =false;
+      notifyListeners();
+    }else{
+      formValid =true;
+      notifyListeners();
+    }
+
+    if(imagesUrl!.isEmpty){
+      imagesUrlValid=false;
+      formValid =false;
+      notifyListeners();
+    }else{
+      formValid =true;
+      notifyListeners();
+    }
+
   }
 
   setSiderIndex({required int index}) {
@@ -268,8 +319,7 @@ class MainProvider extends ChangeNotifier {
     List<String> imgesList = await FireStorage.getAllImageUrls();
     List<String?> localImageUrls = [/* List of local image URLs */];
 
-
-    for (var element in DummyData.chocoList) { 
+    for (var element in DummyData.chocoList) {
       localImageUrls.add(element.image);
       element.imagesList?.split(',').forEach((element) {
         localImageUrls.add(element);
@@ -283,7 +333,7 @@ class MainProvider extends ChangeNotifier {
 
 // Delete unused images from Firebase Storage
     for (var imageUrl in unusedFirebaseImages) {
-     await FireStorage.deleteImageFromCloud(imageUrl);
+      await FireStorage.deleteImageFromCloud(imageUrl);
       debugPrint('deleted item');
     }
   }

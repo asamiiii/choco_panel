@@ -38,29 +38,36 @@ class _ItemsScreenState extends State<ItemsScreen> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ItemDetails(),
-                      ));
-                },
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.amber)),
-                child: SizedBox(
-                  width: 100,
-                  height: 30,
-                  child: Row(
-                    children: [
-                      Text(
-                        AppStrings.addItem,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Consumer<MainProvider>(
+                  builder: (context,provider, child) => provider.isLoading == false?Text('Total Items : ${DummyData.chocoList.length}'):const CircularProgressIndicator()),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ItemDetails(),
+                          ));
+                    },
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.amber)),
+                    child: SizedBox(
+                      width: 100,
+                      height: 30,
+                      child: Row(
+                        children: [
+                          Text(
+                            AppStrings.addItem,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          const Icon(Icons.add)
+                        ],
                       ),
-                      const Icon(Icons.add)
-                    ],
-                  ),
-                )),
+                    )),
+              ],
+            ),
             const SizedBox(
               height: 20,
             ),
