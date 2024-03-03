@@ -21,7 +21,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       // DummyData.chocoList.clear();
       await provider.getItems();
-      // await context.read<MainProvider>().clearImagesUrlFromFireStorage();
+      await context.read<MainProvider>().clearImagesUrlFromFireStorage();
     });
 
     super.initState();
@@ -66,19 +66,21 @@ class _ItemsScreenState extends State<ItemsScreen> {
             ),
             Consumer<MainProvider>(
               builder: (context, provider, child) => provider.isLoading == false
-                  ? GridView.builder(
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) => Item(
-                          index: index, chocoItem: DummyData.chocoList[index]),
-                      itemCount: DummyData.chocoList.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 6,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: 0.7,
-                        crossAxisSpacing: 10,
+                  ? Expanded(
+                    child: GridView.builder(
+                        // shrinkWrap: true,
+                        itemBuilder: (context, index) => Item(
+                            index: index, chocoItem: DummyData.chocoList[index]),
+                        itemCount: DummyData.chocoList.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 6,
+                          mainAxisSpacing: 10,
+                          childAspectRatio: 0.7,
+                          crossAxisSpacing: 10,
+                        ),
                       ),
-                    )
+                  )
                   : const Center(child: CircularProgressIndicator()),
             ),
           ],

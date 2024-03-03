@@ -10,44 +10,52 @@ class BigTextFields extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<MainProvider>(
-      builder: (context, provider, child) =>SizedBox(
-        width: 500,
-        child: Column(
-          children: [
-            
-            const SizedBox(
-              height: 20,
+      builder: (context, provider, child) =>Container(
+        width: 400,
+        padding: EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.grey
+              )
             ),
-            SizedBox(
-              // height: 150,
-              width: 350,
-              child: AppTextField(
-                isValid: provider.formValid,
-                label: AppStrings.ingredients,
-                controller: provider.ingredientsC,
-                hintText:AppStrings.ingredients,
-                keyboardType: TextInputType.text,
-                icon: const Icon(Icons.details_outlined),
-                maxLines: 10,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              
+              const SizedBox(
+                height: 20,
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              // height: 150,
-              width: 350,
-              child: AppTextField(
-                isValid: provider.formValid,
-                label:AppStrings.nutritionDeclaration ,
-                controller: provider.nutritionDeclarationC,
-                hintText: AppStrings.nutritionDeclaration,
-                keyboardType: TextInputType.text,
-                icon: const Icon(Icons.numbers_outlined),
-                maxLines: 10,
+              SizedBox(
+                // height: 150,
+                width: 350,
+                child: AppTextField(
+                  isValid: provider.formValid,
+                  label: AppStrings.ingredients,
+                  controller: provider.ingredientsC,
+                  hintText:AppStrings.ingredients,
+                  keyboardType: TextInputType.text,
+                  icon: const Icon(Icons.details_outlined),
+                  maxLines: 10,
+                ),
               ),
-            ),
-          ],
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                // height: 150,
+                width: 350,
+                child: AppTextField(
+                  isValid: provider.formValid,
+                  label:AppStrings.nutritionDeclaration ,
+                  controller: provider.nutritionDeclarationC,
+                  hintText: AppStrings.nutritionDeclaration,
+                  keyboardType: TextInputType.text,
+                  icon: const Icon(Icons.numbers_outlined),
+                  maxLines: 10,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -77,4 +77,8 @@ class FireStorage {
 
     return imageUrls;
   }
+
+  static Future<void> deleteImageFromCloud(String url)async {
+  await  FirebaseStorage.instance.refFromURL(url).delete();
+  }
 }

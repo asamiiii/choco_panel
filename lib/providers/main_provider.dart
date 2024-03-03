@@ -266,7 +266,15 @@ class MainProvider extends ChangeNotifier {
 
   clearImagesUrlFromFireStorage() async {
     List<String> imgesList = await FireStorage.getAllImageUrls();
-    List<String> localImageUrls = [/* List of local image URLs */];
+    List<String?> localImageUrls = [/* List of local image URLs */];
+
+
+    for (var element in DummyData.chocoList) { 
+      localImageUrls.add(element.image);
+      element.imagesList?.split(',').forEach((element) {
+        localImageUrls.add(element);
+      });
+    }
 
 // Find unused images in Firebase Storage
     List<String> unusedFirebaseImages = imgesList
@@ -275,13 +283,9 @@ class MainProvider extends ChangeNotifier {
 
 // Delete unused images from Firebase Storage
     for (var imageUrl in unusedFirebaseImages) {
+     await FireStorage.deleteImageFromCloud(imageUrl);
       debugPrint('deleted item');
-      // Implement the code to delete the image based on your Firebase Storage implementation
-      // Example: firebaseStorage.refFromURL(imageUrl).delete();
     }
-    // for (var storageImage in imgesList) {
-
-    // }
   }
 
   Future<void> uploadeMultiImagesAndGetUrl() async {
