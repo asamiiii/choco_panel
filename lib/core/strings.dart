@@ -9,6 +9,7 @@ class AppStrings{
   static String addItem ='Add Item';
   static String items = 'Items';
   static String announcement ='Announcement';
+  static String search ='Search';
   static String addAnnouncement ='Add Announcement';
   static String editAnnouncement ='Edit Announcement';
   static String addNewAnnouncment ='Add New Announcment';

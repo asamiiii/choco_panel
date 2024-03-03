@@ -43,14 +43,11 @@ class Item extends StatelessWidget {
             Positioned(
                 top: 0,
                 left: 14,
-                child: Hero(
-                  tag: chocoItem!.id ?? '',
-                  child: ClipOval(
-                    child: ImageNetwork(
-                      image: chocoItem?.image ?? '',
-                      height: 150,
-                      width: 150,
-                    ),
+                child: ClipOval(
+                  child: ImageNetwork(
+                    image: chocoItem?.image ?? '',
+                    height: 150,
+                    width: 150,
                   ),
                 )),
             Positioned(

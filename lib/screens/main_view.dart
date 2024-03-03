@@ -4,6 +4,7 @@ import 'package:choco_panel/core/theme.dart';
 import 'package:choco_panel/providers/main_provider.dart';
 import 'package:choco_panel/screens/announcment_screen/announcement_screen.dart';
 import 'package:choco_panel/screens/items_screen/items_screen.dart';
+import 'package:choco_panel/screens/search_screen/search_view.dart';
 import 'package:choco_panel/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +40,10 @@ class MainView extends StatelessWidget {
                   SidebarXItem(icon: Icons.announcement, label:AppStrings.announcement ,onTap: () {
                     provider.setSiderIndex(index: 1);
                   },),
+
+                  SidebarXItem(icon: Icons.search, label:AppStrings.search ,onTap: () {
+                    provider.setSiderIndex(index: 2);
+                  },),
                 ],
               ),
               selectedScreenIndex(provider.selectedIndex)
@@ -58,7 +63,7 @@ Widget selectedScreenIndex(int? index){
     case 1:
     return const AnnouncementScreen();
     case 2:
-    return const SettingsScreen();
+    return  SearchScreen();
     default:
     return const ItemsScreen(); 
   }
